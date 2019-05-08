@@ -1,6 +1,8 @@
 # BCContainerHelperGUI
 User Interface for simple use of the Powershell Moduel navcontainerhelper
-During the first start navcontainerhelper is getting installed.
+During the first start navcontainerhelper is getting installed. 
+
+I am working on this project in my free time so it could take some time to implement new Features
 
 ## Installation
 Just Download BCDockerHelperGUI.exe and run
