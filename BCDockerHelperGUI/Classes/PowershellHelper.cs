@@ -7,11 +7,13 @@ using System.Management.Automation;
 using System.Collections.ObjectModel;
 using System.Runtime.Remoting.Messaging;
 using BCDockerHelper.Resources;
+using System.Text.RegularExpressions;
 
 namespace BCDockerHelper
 {
     class PowershellHelper
     {
+        private const string PasswordRegexPattern = "(ConvertTo-SecureString -String \")(.*)(\" -AsPlainText)";
         #region Singleton definition
         private static PowershellHelper _instance;
         public static PowershellHelper Instance
@@ -52,13 +54,19 @@ namespace BCDockerHelper
         private void InitializeAsyncScriptInstance()
         {
             asyncScript = PowerShell.Create();
-            pso = new PSDataCollection<PSObject>();
+            InitializePSO();
             asyncScript.Streams.Error.DataAdded += ErrorDataAdded;
             asyncScript.Streams.Information.DataAdded += MessageDataAdded;
             asyncScript.Streams.Progress.DataAdded += ProgressDataAdded;
-            pso.DataAdded += PSODataAdded;
             asyncScript.AddScript("Set-ExecutionPolicy -ExecutionPolicy Unrestricted");
             asyncScript.Invoke();
+        }
+
+        private void InitializePSO()
+        {
+            if (pso != null) pso.DataAdded -= PSODataAdded;
+            pso = new PSDataCollection<PSObject>();
+            pso.DataAdded += PSODataAdded;
         }
 
         #endregion
@@ -144,7 +152,7 @@ namespace BCDockerHelper
             }
             return images;
         }
-        
+
 
 
         public async Task<bool> RestartContainer(string containername)
@@ -167,31 +175,46 @@ namespace BCDockerHelper
         {
             return await PerformPowershellAsync(String.Format("docker rmi {0}", ID));
         }
-        public async Task<bool> CreateContainer(string containername,string username,string password,bool includeCside,string dockerimage,bool acceptEula, string image)
+        public async Task<bool> CreateContainer(string containername, 
+                                                string username, 
+                                                string password, 
+                                                bool includeCside, 
+                                                bool acceptEula, 
+                                                string image,
+                                                string tag,
+                                                bool winAuth)
         {
+            username = username.Split('\\').Last();
             StringBuilder command = new StringBuilder();
             command.AppendFormat("$credential = ([PSCredential]::new(\"{0}\", (ConvertTo-SecureString -String \"{1}\" -AsPlainText -Force))) \r\n", username, password);
+
             command.AppendFormat("New-NavContainer -accept_eula:{0} ", acceptEula ? "$TRUE" : "$FALSE");
             command.AppendFormat("-containername {0} ", containername);
             command.Append("-credential $credential ");
-            command.Append("-auth NavUserPassword ");
-            if (includeCside)  command.Append("-includeCSide ");
+            command.AppendFormat("-auth {0}", winAuth? "Windows " : "NavUserPassword ");
+            if (includeCside) command.Append("-includeCSide ");
             command.Append("-doNotExportObjectsToText ");
             command.Append("-usessl:$false ");
             command.Append("-updateHosts ");
             command.Append("-assignPremiumPlan ");
             command.Append("-shortcuts Startmenu ");
-            command.AppendFormat("-imageName {0} ", image);
+            command.Append("-useBestContainerOS ");
+            command.AppendFormat("-imageName {0}", image);
+            if (!String.IsNullOrEmpty(tag))
+            {
+                command.AppendFormat(":{0}", tag);
+                command.Append(" ");
+            }
 
 
-            return await PerformPowershellAsync(command.ToString());            
+            return await PerformPowershellAsync(command.ToString());
         }
 
         private async Task<bool> PerformPowershellAsync(string command)
         {
             return await PerformPowershellAsync(command, true);
         }
-        private async Task<bool> PerformPowershellAsync(string command,bool importNavContainerHelper)
+        private async Task<bool> PerformPowershellAsync(string command, bool importNavContainerHelper)
         {
             if (asyncScript.InvocationStateInfo.State == PSInvocationState.Running)
             {
@@ -202,16 +225,26 @@ namespace BCDockerHelper
             if (importNavContainerHelper)
                 sb.AppendLine("import-module navcontainerhelper");
             sb.AppendLine(command);
+            asyncScript.Commands.Clear();
             asyncScript.AddScript(sb.ToString());
-            StartScriptCallback?.Invoke(this, command);
+            SendCommandToLog(command);
+            pso.Clear();
             var result = asyncScript.BeginInvoke<PSObject, PSObject>(null, pso);
             await Task.Factory.FromAsync(result, x => { });
             if (asyncScript.HadErrors)
             {
                 ErrorCallback?.Invoke(this, GlobalRessources.ErrorScriptCompletedWithError);
             }
+            InitializePSO();
             EndScriptCallback?.Invoke(this, null);
             return true;
+        }
+
+        private void SendCommandToLog(string command)
+        {
+            
+            command = Regex.Replace(command, PasswordRegexPattern, m=>m.Groups[1] + "****" + m.Groups[3]);
+            StartScriptCallback?.Invoke(this, command);
         }
 
         public void ErrorDataAdded(Object sender, DataAddedEventArgs e)
@@ -254,6 +287,7 @@ namespace BCDockerHelper
         public void StopAllTasks()
         {
             asyncScript.Stop();
+            EndScriptCallback?.Invoke(this, null);
         }
         #endregion
 

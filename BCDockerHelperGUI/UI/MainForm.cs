@@ -19,7 +19,6 @@ namespace BCDockerHelper.UI
     {
         readonly int REFRESH_COUNTER = 30000;
 
-
         List<Object> Containers = new List<Object>();
         List<Object> Images = new List<Object>();
         Container selectedContainerItem = null;
@@ -32,6 +31,8 @@ namespace BCDockerHelper.UI
             InitializeComponent();
             InitializeContainerLst();
             InitializeImageLst();
+            InitializeShortcutCombo();
+            InitializeImageCombo();
             RefreshButtons();
             PowershellHelper.Instance.MessageCallback += MessageCallback;
             PowershellHelper.Instance.ErrorCallback += ErrorCallback;
@@ -98,7 +99,39 @@ namespace BCDockerHelper.UI
             lstImages.FullRowSelect = true;
         }
 
+        private void InitializeShortcutCombo()
+        {
+            cmbShortcuts.Items.Clear();
+            cmbShortcuts.Items.Add("None");
+            cmbShortcuts.Items.Add("Desktop");
+            cmbShortcuts.Items.Add("StartMenu");
+            cmbShortcuts.Items.Add("CommonStartMenu");
+            cmbShortcuts.SelectedIndex = 2;
+        }
+
+        private void InitializeImageCombo()
+        {
+            cmbDockerImage.Items.Add("mcr.microsoft.com/businesscentral/onprem");
+            cmbDockerImage.Items.Add("mcr.microsoft.com/businesscentral/sandbox");
+            cmbDockerImage.SelectedIndex = 0;
+        }
+
         #region Control Events
+        protected override void OnLoad(EventArgs e)
+        {
+            var btn = new Button();
+            btn.Size = new Size(25, txtTag.ClientSize.Height + 2);
+            btn.Location = new Point(txtTag.ClientSize.Width - btn.Width, -1);
+            btn.Cursor = Cursors.Default;
+            btn.Text = "...";
+            Bitmap bmp = BCDockerHelper.Resources.GlobalRessources.DotDotDot;
+            bmp.MakeTransparent(Color.White);
+            btn.Image = bmp;
+            btn.Click += btnTag_Click;
+            txtTag.Controls.Add(btn);
+            SendMessage(txtTag.Handle, 0xd3, (IntPtr)2, (IntPtr)(btn.Width << 16));
+            base.OnLoad(e);
+        }
 
         private void lstContainer_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -134,6 +167,10 @@ namespace BCDockerHelper.UI
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             refreshTimer.Stop();
+            PowershellHelper.Instance.MessageCallback -= MessageCallback;
+            PowershellHelper.Instance.ErrorCallback -= ErrorCallback;
+            PowershellHelper.Instance.StartScriptCallback -= StartScriptCallback;
+            PowershellHelper.Instance.EndScriptCallback -= EndScriptCallback;
         }
 
         private void btnStopPowershell_Click(object sender, EventArgs e)
@@ -167,6 +204,10 @@ namespace BCDockerHelper.UI
             var result = selectedContainerItem.Remove();
             tf.FromAsync(result, x => { FillContainerListBox(); });
         }
+        private void btnTag_Click(object sender, EventArgs e)
+        {
+            txtTag.Text = Classes.Tag.GetTagFromList(cmbDockerImage.Text);
+        }
 
         private void btnNewBCContainer_Click(object sender, EventArgs e)
         {
@@ -176,9 +217,10 @@ namespace BCDockerHelper.UI
                                                         txtUsername.Text,
                                                         txtPassword.Text,
                                                         chkIncludeCside.Checked,
-                                                        txtDockerImage.Text,
                                                         chkAccepEula.Checked,
-                                                        txtDockerImage.Text);
+                                                        cmbDockerImage.Text,
+                                                        txtTag.Text,
+                                                        chkUseWindowsAuth.Checked);
             tf.FromAsync(result, x => { FillContainerListBox(); });
         }
 
@@ -206,6 +248,27 @@ namespace BCDockerHelper.UI
             TaskFactory tf = new TaskFactory();
             var result = selectedImageItem.Remove();
             tf.FromAsync(result, x => { FillImagesListBox(); });
+        }
+
+
+        private void ChkUseWindowsAuth_CheckedChanged(object sender, EventArgs e)
+        {
+            bool winAuth = ((CheckBox)sender).Checked;
+            txtUsername.ReadOnly = winAuth;
+            if (winAuth)
+            {
+                txtUsername.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            }
+        }
+
+        private void TxtDockerImage_Validated(object sender, EventArgs e)
+        {
+
+            string image, tag;
+            var split = cmbDockerImage.Text.Split(':');
+            image = split[0];
+            tag = split.Length > 1 ? split[1] : "";
+            cmbDockerImage.Text = image;
         }
 
         #endregion
@@ -499,5 +562,9 @@ namespace BCDockerHelper.UI
             }
         }
 
+
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
     }
 }

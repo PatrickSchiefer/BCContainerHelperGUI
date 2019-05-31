@@ -51,17 +51,23 @@
             this.txCurrentScript = new System.Windows.Forms.ToolStripLabel();
             this.splContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtDockerImage = new System.Windows.Forms.TextBox();
-            this.lblDockerImage = new System.Windows.Forms.Label();
-            this.lblIncludeCside = new System.Windows.Forms.Label();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.lblUsername = new System.Windows.Forms.Label();
-            this.btnNewBCContainer = new System.Windows.Forms.Button();
+            this.lblShortcuts = new System.Windows.Forms.Label();
             this.txtContainerName = new System.Windows.Forms.TextBox();
             this.lblContainername = new System.Windows.Forms.Label();
             this.chkIncludeCside = new System.Windows.Forms.CheckBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.chkUseWindowsAuth = new System.Windows.Forms.CheckBox();
+            this.lblDockerImage = new System.Windows.Forms.Label();
+            this.lblIncludeCside = new System.Windows.Forms.Label();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.lblUsername = new System.Windows.Forms.Label();
+            this.lblWindowsUser = new System.Windows.Forms.Label();
+            this.lblTag = new System.Windows.Forms.Label();
+            this.txtTag = new System.Windows.Forms.TextBox();
+            this.cmbDockerImage = new System.Windows.Forms.ComboBox();
+            this.cmbShortcuts = new System.Windows.Forms.ComboBox();
+            this.btnNewBCContainer = new System.Windows.Forms.Button();
             this.lblAcceptEula = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.chkAccepEula = new System.Windows.Forms.CheckBox();
@@ -292,6 +298,10 @@
             // 
             this.splContainer1.Panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.splContainer1.Panel1.Controls.Add(this.tableLayoutPanel1);
+            this.splContainer1.Panel1.Controls.Add(this.btnNewBCContainer);
+            this.splContainer1.Panel1.Controls.Add(this.lblAcceptEula);
+            this.splContainer1.Panel1.Controls.Add(this.linkLabel1);
+            this.splContainer1.Panel1.Controls.Add(this.chkAccepEula);
             // 
             // splContainer1.Panel2
             // 
@@ -305,23 +315,26 @@
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.AutoScroll = true;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.txtDockerImage, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblDockerImage, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblIncludeCside, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtPassword, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblPassword, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtUsername, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblUsername, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnNewBCContainer, 1, 20);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.lblShortcuts, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.txtContainerName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblContainername, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.chkIncludeCside, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblAcceptEula, 0, 20);
-            this.tableLayoutPanel1.Controls.Add(this.linkLabel1, 0, 19);
-            this.tableLayoutPanel1.Controls.Add(this.chkAccepEula, 1, 20);
+            this.tableLayoutPanel1.Controls.Add(this.chkIncludeCside, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtPassword, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtUsername, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.chkUseWindowsAuth, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblDockerImage, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblIncludeCside, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblPassword, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblUsername, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblWindowsUser, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblTag, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtTag, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.cmbDockerImage, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.cmbShortcuts, 1, 7);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 23;
@@ -330,11 +343,11 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -348,97 +361,27 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(298, 524);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(298, 445);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
-            // txtDockerImage
+            // lblShortcuts
             // 
-            this.txtDockerImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDockerImage.Location = new System.Drawing.Point(87, 101);
-            this.txtDockerImage.Name = "txtDockerImage";
-            this.txtDockerImage.Size = new System.Drawing.Size(208, 20);
-            this.txtDockerImage.TabIndex = 14;
-            this.txtDockerImage.Text = "microsoft/bcsandbox";
-            // 
-            // lblDockerImage
-            // 
-            this.lblDockerImage.AutoSize = true;
-            this.lblDockerImage.Location = new System.Drawing.Point(3, 98);
-            this.lblDockerImage.Name = "lblDockerImage";
-            this.lblDockerImage.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.lblDockerImage.Size = new System.Drawing.Size(70, 18);
-            this.lblDockerImage.TabIndex = 13;
-            this.lblDockerImage.Text = "Dockerimage";
-            // 
-            // lblIncludeCside
-            // 
-            this.lblIncludeCside.AutoSize = true;
-            this.lblIncludeCside.Location = new System.Drawing.Point(3, 78);
-            this.lblIncludeCside.Name = "lblIncludeCside";
-            this.lblIncludeCside.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.lblIncludeCside.Size = new System.Drawing.Size(73, 18);
-            this.lblIncludeCside.TabIndex = 11;
-            this.lblIncludeCside.Text = "Include CSide";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPassword.Location = new System.Drawing.Point(87, 55);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(208, 20);
-            this.txtPassword.TabIndex = 10;
-            this.txtPassword.UseSystemPasswordChar = true;
-            // 
-            // lblPassword
-            // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(3, 52);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.lblPassword.Size = new System.Drawing.Size(53, 18);
-            this.lblPassword.TabIndex = 9;
-            this.lblPassword.Text = "Password";
-            // 
-            // txtUsername
-            // 
-            this.txtUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUsername.Location = new System.Drawing.Point(87, 29);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(208, 20);
-            this.txtUsername.TabIndex = 8;
-            // 
-            // lblUsername
-            // 
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(3, 26);
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.lblUsername.Size = new System.Drawing.Size(55, 18);
-            this.lblUsername.TabIndex = 7;
-            this.lblUsername.Text = "Username";
-            // 
-            // btnNewBCContainer
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.btnNewBCContainer, 2);
-            this.btnNewBCContainer.Location = new System.Drawing.Point(3, 447);
-            this.btnNewBCContainer.Name = "btnNewBCContainer";
-            this.btnNewBCContainer.Size = new System.Drawing.Size(136, 24);
-            this.btnNewBCContainer.TabIndex = 6;
-            this.btnNewBCContainer.Text = "Create BC Container";
-            this.btnNewBCContainer.UseVisualStyleBackColor = true;
-            this.btnNewBCContainer.Click += new System.EventHandler(this.btnNewBCContainer_Click);
+            this.lblShortcuts.AutoSize = true;
+            this.lblShortcuts.Location = new System.Drawing.Point(3, 171);
+            this.lblShortcuts.Name = "lblShortcuts";
+            this.lblShortcuts.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblShortcuts.Size = new System.Drawing.Size(76, 18);
+            this.lblShortcuts.TabIndex = 21;
+            this.lblShortcuts.Text = "Shortcut Icons";
             // 
             // txtContainerName
             // 
             this.txtContainerName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtContainerName.Location = new System.Drawing.Point(87, 3);
+            this.txtContainerName.Location = new System.Drawing.Point(152, 3);
             this.txtContainerName.Name = "txtContainerName";
-            this.txtContainerName.Size = new System.Drawing.Size(208, 20);
-            this.txtContainerName.TabIndex = 5;
+            this.txtContainerName.Size = new System.Drawing.Size(143, 20);
+            this.txtContainerName.TabIndex = 0;
             this.txtContainerName.Text = "BCSandbox";
             // 
             // lblContainername
@@ -456,18 +399,149 @@
             this.chkIncludeCside.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chkIncludeCside.AutoSize = true;
-            this.chkIncludeCside.Location = new System.Drawing.Point(87, 81);
+            this.chkIncludeCside.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkIncludeCside.Location = new System.Drawing.Point(152, 101);
             this.chkIncludeCside.Name = "chkIncludeCside";
-            this.chkIncludeCside.Padding = new System.Windows.Forms.Padding(100, 0, 0, 0);
-            this.chkIncludeCside.Size = new System.Drawing.Size(208, 14);
-            this.chkIncludeCside.TabIndex = 12;
+            this.chkIncludeCside.Size = new System.Drawing.Size(143, 14);
+            this.chkIncludeCside.TabIndex = 4;
             this.chkIncludeCside.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkIncludeCside.UseVisualStyleBackColor = true;
             // 
+            // txtPassword
+            // 
+            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPassword.Location = new System.Drawing.Point(152, 75);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(143, 20);
+            this.txtPassword.TabIndex = 3;
+            this.txtPassword.UseSystemPasswordChar = true;
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtUsername.Location = new System.Drawing.Point(152, 49);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(143, 20);
+            this.txtUsername.TabIndex = 2;
+            // 
+            // chkUseWindowsAuth
+            // 
+            this.chkUseWindowsAuth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkUseWindowsAuth.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkUseWindowsAuth.Location = new System.Drawing.Point(152, 29);
+            this.chkUseWindowsAuth.Name = "chkUseWindowsAuth";
+            this.chkUseWindowsAuth.Size = new System.Drawing.Size(143, 14);
+            this.chkUseWindowsAuth.TabIndex = 1;
+            this.chkUseWindowsAuth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkUseWindowsAuth.UseVisualStyleBackColor = true;
+            this.chkUseWindowsAuth.CheckedChanged += new System.EventHandler(this.ChkUseWindowsAuth_CheckedChanged);
+            // 
+            // lblDockerImage
+            // 
+            this.lblDockerImage.AutoSize = true;
+            this.lblDockerImage.Location = new System.Drawing.Point(3, 118);
+            this.lblDockerImage.Name = "lblDockerImage";
+            this.lblDockerImage.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblDockerImage.Size = new System.Drawing.Size(70, 18);
+            this.lblDockerImage.TabIndex = 13;
+            this.lblDockerImage.Text = "Dockerimage";
+            // 
+            // lblIncludeCside
+            // 
+            this.lblIncludeCside.AutoSize = true;
+            this.lblIncludeCside.Location = new System.Drawing.Point(3, 98);
+            this.lblIncludeCside.Name = "lblIncludeCside";
+            this.lblIncludeCside.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblIncludeCside.Size = new System.Drawing.Size(73, 18);
+            this.lblIncludeCside.TabIndex = 11;
+            this.lblIncludeCside.Text = "Include CSide";
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Location = new System.Drawing.Point(3, 72);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblPassword.Size = new System.Drawing.Size(53, 18);
+            this.lblPassword.TabIndex = 9;
+            this.lblPassword.Text = "Password";
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Location = new System.Drawing.Point(3, 46);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblUsername.Size = new System.Drawing.Size(55, 18);
+            this.lblUsername.TabIndex = 7;
+            this.lblUsername.Text = "Username";
+            // 
+            // lblWindowsUser
+            // 
+            this.lblWindowsUser.AutoSize = true;
+            this.lblWindowsUser.Location = new System.Drawing.Point(3, 26);
+            this.lblWindowsUser.Name = "lblWindowsUser";
+            this.lblWindowsUser.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblWindowsUser.Size = new System.Drawing.Size(127, 18);
+            this.lblWindowsUser.TabIndex = 19;
+            this.lblWindowsUser.Text = "Windows Authentification";
+            // 
+            // lblTag
+            // 
+            this.lblTag.AutoSize = true;
+            this.lblTag.Location = new System.Drawing.Point(3, 145);
+            this.lblTag.Name = "lblTag";
+            this.lblTag.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.lblTag.Size = new System.Drawing.Size(26, 18);
+            this.lblTag.TabIndex = 20;
+            this.lblTag.Text = "Tag";
+            // 
+            // txtTag
+            // 
+            this.txtTag.Location = new System.Drawing.Point(152, 148);
+            this.txtTag.Name = "txtTag";
+            this.txtTag.Size = new System.Drawing.Size(143, 20);
+            this.txtTag.TabIndex = 6;
+            this.txtTag.Text = "w1";
+            // 
+            // cmbDockerImage
+            // 
+            this.cmbDockerImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbDockerImage.Location = new System.Drawing.Point(152, 121);
+            this.cmbDockerImage.Name = "cmbDockerImage";
+            this.cmbDockerImage.Size = new System.Drawing.Size(143, 21);
+            this.cmbDockerImage.TabIndex = 5;
+            this.cmbDockerImage.Validated += new System.EventHandler(this.TxtDockerImage_Validated);
+            // 
+            // cmbShortcuts
+            // 
+            this.cmbShortcuts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbShortcuts.FormattingEnabled = true;
+            this.cmbShortcuts.Location = new System.Drawing.Point(152, 174);
+            this.cmbShortcuts.Name = "cmbShortcuts";
+            this.cmbShortcuts.Size = new System.Drawing.Size(143, 21);
+            this.cmbShortcuts.TabIndex = 22;
+            // 
+            // btnNewBCContainer
+            // 
+            this.btnNewBCContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnNewBCContainer.Location = new System.Drawing.Point(3, 496);
+            this.btnNewBCContainer.Name = "btnNewBCContainer";
+            this.btnNewBCContainer.Size = new System.Drawing.Size(136, 24);
+            this.btnNewBCContainer.TabIndex = 9;
+            this.btnNewBCContainer.Text = "Create BC Container";
+            this.btnNewBCContainer.UseVisualStyleBackColor = true;
+            this.btnNewBCContainer.Click += new System.EventHandler(this.btnNewBCContainer_Click);
+            // 
             // lblAcceptEula
             // 
+            this.lblAcceptEula.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAcceptEula.AutoSize = true;
-            this.lblAcceptEula.Location = new System.Drawing.Point(3, 424);
+            this.lblAcceptEula.Location = new System.Drawing.Point(6, 475);
             this.lblAcceptEula.Name = "lblAcceptEula";
             this.lblAcceptEula.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblAcceptEula.Size = new System.Drawing.Size(65, 18);
@@ -476,12 +550,12 @@
             // 
             // linkLabel1
             // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkLabel1.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.linkLabel1, 2);
-            this.linkLabel1.Location = new System.Drawing.Point(3, 404);
+            this.linkLabel1.Location = new System.Drawing.Point(6, 461);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(232, 13);
-            this.linkLabel1.TabIndex = 17;
+            this.linkLabel1.TabIndex = 7;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "https://go.microsoft.com/fwlink/?linkid=861843";
             // 
@@ -489,12 +563,11 @@
             // 
             this.chkAccepEula.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkAccepEula.AutoSize = true;
-            this.chkAccepEula.Location = new System.Drawing.Point(87, 427);
+            this.chkAccepEula.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkAccepEula.Location = new System.Drawing.Point(155, 479);
             this.chkAccepEula.Name = "chkAccepEula";
-            this.chkAccepEula.Padding = new System.Windows.Forms.Padding(100, 0, 0, 0);
-            this.chkAccepEula.Size = new System.Drawing.Size(208, 14);
-            this.chkAccepEula.TabIndex = 16;
+            this.chkAccepEula.Size = new System.Drawing.Size(143, 14);
+            this.chkAccepEula.TabIndex = 8;
             this.chkAccepEula.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkAccepEula.UseVisualStyleBackColor = true;
             // 
@@ -553,6 +626,7 @@
             this.toolFooterBar.ResumeLayout(false);
             this.toolFooterBar.PerformLayout();
             this.splContainer1.Panel1.ResumeLayout(false);
+            this.splContainer1.Panel1.PerformLayout();
             this.splContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splContainer1)).EndInit();
             this.splContainer1.ResumeLayout(false);
@@ -588,7 +662,7 @@
         private System.Windows.Forms.RichTextBox rtfOutputLog;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnNewBCContainer;
-        private System.Windows.Forms.TextBox txtDockerImage;
+        private System.Windows.Forms.ComboBox cmbDockerImage;
         private System.Windows.Forms.Label lblDockerImage;
         private System.Windows.Forms.Label lblIncludeCside;
         private System.Windows.Forms.TextBox txtPassword;
@@ -605,6 +679,12 @@
         private System.Windows.Forms.ListView lstImages;
         private System.Windows.Forms.Button btnRemoveImage;
         private System.Windows.Forms.ToolStripButton btnStopPowershell;
+        private System.Windows.Forms.CheckBox chkUseWindowsAuth;
+        private System.Windows.Forms.Label lblWindowsUser;
+        private System.Windows.Forms.Label lblTag;
+        private System.Windows.Forms.TextBox txtTag;
+        private System.Windows.Forms.Label lblShortcuts;
+        private System.Windows.Forms.ComboBox cmbShortcuts;
     }
 }
 

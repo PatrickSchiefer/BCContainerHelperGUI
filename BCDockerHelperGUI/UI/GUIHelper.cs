@@ -22,6 +22,7 @@ namespace BCDockerHelper
         public static void AppendLine(this RichTextBox box, string text)
         {
             box.AppendLine(text, Color.Black);
+            box.ScrollToCaret();
         }
     }
 }
