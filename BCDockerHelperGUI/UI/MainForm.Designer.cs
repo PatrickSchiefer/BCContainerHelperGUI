@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pnlMiddleDock = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -46,6 +47,7 @@
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.toolFooterBar = new System.Windows.Forms.ToolStrip();
             this.prgScriptRunning = new System.Windows.Forms.ToolStripProgressBar();
+            this.btnStopPowershell = new System.Windows.Forms.ToolStripButton();
             this.txCurrentScript = new System.Windows.Forms.ToolStripLabel();
             this.splContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -246,6 +248,7 @@
             this.toolFooterBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolFooterBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.prgScriptRunning,
+            this.btnStopPowershell,
             this.txCurrentScript});
             this.toolFooterBar.Location = new System.Drawing.Point(0, 536);
             this.toolFooterBar.Name = "toolFooterBar";
@@ -258,6 +261,18 @@
             this.prgScriptRunning.Name = "prgScriptRunning";
             this.prgScriptRunning.Size = new System.Drawing.Size(100, 22);
             this.prgScriptRunning.Step = 2;
+            // 
+            // btnStopPowershell
+            // 
+            this.btnStopPowershell.Checked = true;
+            this.btnStopPowershell.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnStopPowershell.Image = ((System.Drawing.Image)(resources.GetObject("btnStopPowershell.Image")));
+            this.btnStopPowershell.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStopPowershell.Name = "btnStopPowershell";
+            this.btnStopPowershell.Size = new System.Drawing.Size(51, 22);
+            this.btnStopPowershell.Text = "Stop";
+            this.btnStopPowershell.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnStopPowershell.Click += new System.EventHandler(this.btnStopPowershell_Click);
             // 
             // txCurrentScript
             // 
@@ -589,6 +604,7 @@
         private System.Windows.Forms.Panel pnlImageControl;
         private System.Windows.Forms.ListView lstImages;
         private System.Windows.Forms.Button btnRemoveImage;
+        private System.Windows.Forms.ToolStripButton btnStopPowershell;
     }
 }
 

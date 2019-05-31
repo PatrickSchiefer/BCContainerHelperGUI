@@ -29,7 +29,7 @@ namespace BCDockerHelper
             scriptInstance = PowerShell.Create();
             scriptInstance.Streams.Error.DataAdded += ErrorDataAdded;
             scriptInstance.Streams.Information.DataAdded += MessageDataAdded;
-            scriptInstance.Streams.Progress.DataAdded += MessageDataAdded;
+            scriptInstance.Streams.Progress.DataAdded += ProgressDataAdded;
             InstallNavContainerHelper();
             InitializeAsyncScriptInstance();
         }
@@ -56,7 +56,7 @@ namespace BCDockerHelper
             asyncScript.Streams.Error.DataAdded += ErrorDataAdded;
             asyncScript.Streams.Information.DataAdded += MessageDataAdded;
             asyncScript.Streams.Progress.DataAdded += ProgressDataAdded;
-            pso.DataAdded += MessageDataAdded;
+            pso.DataAdded += PSODataAdded;
             asyncScript.AddScript("Set-ExecutionPolicy -ExecutionPolicy Unrestricted");
             asyncScript.Invoke();
         }
@@ -217,28 +217,36 @@ namespace BCDockerHelper
         public void ErrorDataAdded(Object sender, DataAddedEventArgs e)
         {
             PSDataCollection<ErrorRecord> dc = asyncScript.Streams.Error;
-            foreach (ErrorRecord error in dc)
+            for (int i = 0; i < dc.Count; i++)
             {
-                ErrorCallback?.Invoke(this, error.Exception.Message);
+                ErrorCallback?.Invoke(this, dc[i].Exception.Message);
             }
             dc.Clear();
         }
         public void MessageDataAdded(Object sender, DataAddedEventArgs e)
         {
-
             PSDataCollection<InformationRecord> informations = (PSDataCollection<InformationRecord>)sender;
-            foreach (InformationRecord information in informations)
+            for (int i = 0; i < informations.Count; i++)
             {
-                MessageCallback?.Invoke(this, information.ToString());
+                MessageCallback?.Invoke(this, informations[i].ToString());
+            }
+            informations.Clear();
+        }
+        public void PSODataAdded(Object sender, DataAddedEventArgs e)
+        {
+            PSDataCollection<PSObject> informations = (PSDataCollection<PSObject>)sender;
+            for (int i = 0; i < informations.Count; i++)
+            {
+                MessageCallback?.Invoke(this, informations[i].ToString());
             }
             informations.Clear();
         }
         public void ProgressDataAdded(Object sender, DataAddedEventArgs e)
         {
             PSDataCollection<ProgressRecord> dc = asyncScript.Streams.Progress;
-            foreach (ProgressRecord progress in dc)
+            for (int i = 0; i < dc.Count; i++)
             {
-                MessageCallback?.Invoke(this, progress.StatusDescription);
+                MessageCallback?.Invoke(this, dc[i].StatusDescription);
             }
             dc.Clear();
         }

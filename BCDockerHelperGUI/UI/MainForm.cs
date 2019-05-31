@@ -39,6 +39,7 @@ namespace BCDockerHelper.UI
             PowershellHelper.Instance.EndScriptCallback += EndScriptCallback;
             refreshTimer.Interval = REFRESH_COUNTER;
             EndScriptCallback(null, null);
+            this.btnStopPowershell.Image = global::BCDockerHelper.Resources.GlobalRessources.Stop;
         }
 
         private void InitializeContainerLst()
@@ -133,6 +134,11 @@ namespace BCDockerHelper.UI
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             refreshTimer.Stop();
+        }
+
+        private void btnStopPowershell_Click(object sender, EventArgs e)
+        {
+            PowershellHelper.Instance.StopAllTasks();
         }
 
         private void btnRestart_Click(object sender, EventArgs e)
@@ -240,6 +246,7 @@ namespace BCDockerHelper.UI
                 txCurrentScript.Text = String.Format(GlobalRessources.CurrentRunningScript, e);
                 prgScriptRunning.Visible = true;
                 prgScriptRunning.Style = ProgressBarStyle.Marquee;
+                btnStopPowershell.Visible = true;
             }
         }
         private void EndScriptCallback(object sender, object e)
@@ -247,6 +254,7 @@ namespace BCDockerHelper.UI
             prgScriptRunning.Style = ProgressBarStyle.Blocks;
             prgScriptRunning.Value = 0;
             prgScriptRunning.Visible = false;
+            btnStopPowershell.Visible = false;
             txCurrentScript.Text = GlobalRessources.Idle;
         }
         #endregion
