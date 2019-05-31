@@ -31,6 +31,6 @@ steps:
     
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'bin\\Release\\'
+    PathtoPublish: 'BCDockerHelperGUI\\bin\\Release\\'
     ArtifactName: 'drop'
     publishLocation: 'Container'
