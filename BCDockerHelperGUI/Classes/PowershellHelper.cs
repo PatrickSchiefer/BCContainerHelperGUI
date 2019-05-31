@@ -76,9 +76,9 @@ namespace BCDockerHelper
 
 
         #region Methods
-        public List<Container> GetContainers()
+        public List<Object> GetContainers()
         {
-            List<Container> containers = new List<Container>();
+            List<Object> containers = new List<Object>();
             scriptInstance.AddScript("docker ps -a --format \"{{.ID}};{{.Names}};{{.Status}}\"");
             var results = scriptInstance.Invoke();
             foreach (var result in results)
@@ -127,7 +127,24 @@ namespace BCDockerHelper
             return containers;
         }
 
-        //docker images --format "{{.Repository}};{{.Tag}};{{.ID}};{{.Size}}"
+        public List<Object> GetImages()
+        {
+            List<Object> images = new List<Object>();
+            scriptInstance.AddScript("docker images --format \"{{.ID}};{{.Repository}};{{.Tag}};{{.Size}}\"");
+            var results = scriptInstance.Invoke();
+            foreach (var result in results)
+            {
+                string[] splitLine = result.ToString().Split(';');
+                Image image = new Image();
+                image.ID = splitLine[0];
+                image.Repository = splitLine[1];
+                image.Tag = splitLine[2];
+                image.Size = splitLine[3];
+                images.Add(image);
+            }
+            return images;
+        }
+        
 
 
         public async Task<bool> RestartContainer(string containername)
@@ -145,6 +162,10 @@ namespace BCDockerHelper
         public async Task<bool> RemoveContainer(string containername)
         {
             return await PerformPowershellAsync(String.Format("Remove-NAVContainer -containername '{0}'", containername));
+        }
+        public async Task<bool> RemoveImage(string ID)
+        {
+            return await PerformPowershellAsync(String.Format("docker rmi {0}", ID));
         }
         public async Task<bool> CreateContainer(string containername,string username,string password,bool includeCside,string dockerimage,bool acceptEula, string image)
         {

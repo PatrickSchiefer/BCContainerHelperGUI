@@ -40,6 +40,9 @@
             this.btnRestart = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pnlImageControl = new System.Windows.Forms.Panel();
+            this.btnRemoveImage = new System.Windows.Forms.Button();
+            this.lstImages = new System.Windows.Forms.ListView();
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.toolFooterBar = new System.Windows.Forms.ToolStrip();
             this.prgScriptRunning = new System.Windows.Forms.ToolStripProgressBar();
@@ -58,15 +61,17 @@
             this.lblContainername = new System.Windows.Forms.Label();
             this.chkIncludeCside = new System.Windows.Forms.CheckBox();
             this.lblAcceptEula = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.chkAccepEula = new System.Windows.Forms.CheckBox();
             this.splContainer2 = new System.Windows.Forms.SplitContainer();
             this.rtfOutputLog = new System.Windows.Forms.RichTextBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pnlMiddleDock.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.pnlMiddle.SuspendLayout();
             this.pnlContainerControl.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.pnlImageControl.SuspendLayout();
             this.toolFooterBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splContainer1)).BeginInit();
             this.splContainer1.Panel1.SuspendLayout();
@@ -190,13 +195,44 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.pnlImageControl);
+            this.tabPage2.Controls.Add(this.lstImages);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.tabPage2.Size = new System.Drawing.Size(589, 501);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Images";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // pnlImageControl
+            // 
+            this.pnlImageControl.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.pnlImageControl.Controls.Add(this.btnRemoveImage);
+            this.pnlImageControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlImageControl.Location = new System.Drawing.Point(0, 428);
+            this.pnlImageControl.Name = "pnlImageControl";
+            this.pnlImageControl.Size = new System.Drawing.Size(589, 73);
+            this.pnlImageControl.TabIndex = 1;
+            // 
+            // btnRemoveImage
+            // 
+            this.btnRemoveImage.Location = new System.Drawing.Point(25, 25);
+            this.btnRemoveImage.Name = "btnRemoveImage";
+            this.btnRemoveImage.Size = new System.Drawing.Size(125, 23);
+            this.btnRemoveImage.TabIndex = 3;
+            this.btnRemoveImage.Text = "Remove Image";
+            this.btnRemoveImage.UseVisualStyleBackColor = true;
+            this.btnRemoveImage.Click += new System.EventHandler(this.btnRemoveImage_Click);
+            // 
+            // lstImages
+            // 
+            this.lstImages.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lstImages.Location = new System.Drawing.Point(0, 0);
+            this.lstImages.Name = "lstImages";
+            this.lstImages.Size = new System.Drawing.Size(589, 433);
+            this.lstImages.TabIndex = 0;
+            this.lstImages.UseCompatibleStateImageBehavior = false;
+            this.lstImages.SelectedIndexChanged += new System.EventHandler(this.lstImages_SelectedIndexChanged);
             // 
             // refreshTimer
             // 
@@ -423,6 +459,17 @@
             this.lblAcceptEula.TabIndex = 15;
             this.lblAcceptEula.Text = "Accept Eula";
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.linkLabel1, 2);
+            this.linkLabel1.Location = new System.Drawing.Point(3, 404);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(232, 13);
+            this.linkLabel1.TabIndex = 17;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "https://go.microsoft.com/fwlink/?linkid=861843";
+            // 
             // chkAccepEula
             // 
             this.chkAccepEula.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -467,17 +514,6 @@
             this.rtfOutputLog.TabIndex = 2;
             this.rtfOutputLog.Text = "";
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.linkLabel1, 2);
-            this.linkLabel1.Location = new System.Drawing.Point(3, 404);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(232, 13);
-            this.linkLabel1.TabIndex = 17;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "https://go.microsoft.com/fwlink/?linkid=861843";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -497,6 +533,8 @@
             this.tabPage1.ResumeLayout(false);
             this.pnlMiddle.ResumeLayout(false);
             this.pnlContainerControl.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.pnlImageControl.ResumeLayout(false);
             this.toolFooterBar.ResumeLayout(false);
             this.toolFooterBar.PerformLayout();
             this.splContainer1.Panel1.ResumeLayout(false);
@@ -548,6 +586,9 @@
         private System.Windows.Forms.Label lblAcceptEula;
         private System.Windows.Forms.CheckBox chkAccepEula;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Panel pnlImageControl;
+        private System.Windows.Forms.ListView lstImages;
+        private System.Windows.Forms.Button btnRemoveImage;
     }
 }
 

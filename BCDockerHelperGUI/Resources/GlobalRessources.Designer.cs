@@ -133,6 +133,42 @@ namespace BCDockerHelper.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ID ähnelt.
+        /// </summary>
+        internal static string ImageListColumn1 {
+            get {
+                return ResourceManager.GetString("ImageListColumn1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Repository ähnelt.
+        /// </summary>
+        internal static string ImageListColumn2 {
+            get {
+                return ResourceManager.GetString("ImageListColumn2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tags ähnelt.
+        /// </summary>
+        internal static string ImageListColumn3 {
+            get {
+                return ResourceManager.GetString("ImageListColumn3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Size ähnelt.
+        /// </summary>
+        internal static string ImageListColumn4 {
+            get {
+                return ResourceManager.GetString("ImageListColumn4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Initialize powershell please wait... ähnelt.
         /// </summary>
         internal static string InitPowershellPleaseWait {

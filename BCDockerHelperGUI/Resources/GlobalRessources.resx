@@ -141,6 +141,18 @@
   <data name="Idle" xml:space="preserve">
     <value>Scriptengine idle</value>
   </data>
+  <data name="ImageListColumn1" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="ImageListColumn2" xml:space="preserve">
+    <value>Repository</value>
+  </data>
+  <data name="ImageListColumn3" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="ImageListColumn4" xml:space="preserve">
+    <value>Size</value>
+  </data>
   <data name="InitPowershellPleaseWait" xml:space="preserve">
     <value>Initialize powershell please wait...</value>
   </data>
