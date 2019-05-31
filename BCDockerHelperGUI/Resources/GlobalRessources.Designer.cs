@@ -19,7 +19,7 @@ namespace BCDockerHelper.Resources {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class GlobalRessources {
@@ -106,6 +106,16 @@ namespace BCDockerHelper.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DotDotDot {
+            get {
+                object obj = ResourceManager.GetObject("DotDotDot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Powershell completed with errors ähnelt.
         /// </summary>
         internal static string ErrorScriptCompletedWithError {
@@ -133,11 +143,57 @@ namespace BCDockerHelper.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ID ähnelt.
+        /// </summary>
+        internal static string ImageListColumn1 {
+            get {
+                return ResourceManager.GetString("ImageListColumn1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Repository ähnelt.
+        /// </summary>
+        internal static string ImageListColumn2 {
+            get {
+                return ResourceManager.GetString("ImageListColumn2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tags ähnelt.
+        /// </summary>
+        internal static string ImageListColumn3 {
+            get {
+                return ResourceManager.GetString("ImageListColumn3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Size ähnelt.
+        /// </summary>
+        internal static string ImageListColumn4 {
+            get {
+                return ResourceManager.GetString("ImageListColumn4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Initialize powershell please wait... ähnelt.
         /// </summary>
         internal static string InitPowershellPleaseWait {
             get {
                 return ResourceManager.GetString("InitPowershellPleaseWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stop {
+            get {
+                object obj = ResourceManager.GetObject("Stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

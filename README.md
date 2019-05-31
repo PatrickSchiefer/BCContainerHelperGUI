@@ -16,12 +16,12 @@ Just Download BCDockerHelperGUI.exe and run
 * Create Dockercontainer using navcontainerhelper
 * List all local containers
 * Start/Stop/Restart/Remove Dockercontainer using navcontainerhelper
+* List all Images with Tagname and Size
+* Delete Images
 
 ![GUI](Images/Screenshot-1.jpg)
 
 ## Upcomming Features
-* List local images
-* Delete old images
 * Lookup dockertags
 * Publish Apps to Container
 * Support more Parameters from navcontainerhelper

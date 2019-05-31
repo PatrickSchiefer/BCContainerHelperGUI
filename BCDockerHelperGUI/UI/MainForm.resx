@@ -123,4 +123,18 @@
   <metadata name="toolFooterBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>401, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnStopPowershell.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGPSURBVHhe7d2tSoNhGIfx9wQ8CLEKYhSLeBomFQU/GCIM
+        iysaLcsGs2EggohZTGKQCZr8CFMP49bBbM94P57JVa4//Or9wnPB6grnnHPOOTdun4OI3nnEcUdluicR
+        /ceI0dPl7+E+Ymk2Yn5KdRzsTSDCx3vE8lz6Ayp32M6MsLuePqzqri4bRvj+Sh9UPa3NhgFentMHVc/C
+        tAFQBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZ
+        AGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFg
+        BoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAWOMAw39QTR1UPVurDQMMt7GS
+        PqrqLnoZAZ766aOqZn874/H/dncbsTiT/oDG21mLGPz+jI+eMW9vrxFnpxHtlsocdSJurif08M4555xz
+        zv3HiuIH13TeQHJrkK0AAAAASUVORK5CYII=
+</value>
+  </data>
 </root>
