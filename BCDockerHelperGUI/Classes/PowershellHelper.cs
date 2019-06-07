@@ -14,6 +14,8 @@ namespace BCDockerHelper
     class PowershellHelper
     {
         private const string PasswordRegexPattern = "(ConvertTo-SecureString -String \")(.*)(\" -AsPlainText)";
+
+
         #region Singleton definition
         private static PowershellHelper _instance;
         public static PowershellHelper Instance
@@ -171,6 +173,12 @@ namespace BCDockerHelper
         {
             return await PerformPowershellAsync(String.Format("Remove-NAVContainer -containername '{0}'", containername));
         }
+
+        public async Task<bool> RegistryLogin(string registry, string username, string password)
+        {
+            return await PerformPowershellAsync(String.Format("docker login \"{0}\" -u \"{1}\" -p \"{2}\"", registry,username,password));
+        }
+
         public async Task<bool> RemoveImage(string ID)
         {
             return await PerformPowershellAsync(String.Format("docker rmi {0}", ID));

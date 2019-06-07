@@ -8,8 +8,10 @@ using System.Windows.Forms;
 
 namespace BCDockerHelper
 {
+    public delegate void ChangeCursorHandler(Cursor c);
     static class GUIHelper
     {
+        public static ChangeCursorHandler ChangeCursor { get; set; }
         public static void AppendLine(this RichTextBox box, string text, Color color)
         {
             box.SelectionStart = box.TextLength;
@@ -24,5 +26,7 @@ namespace BCDockerHelper
             box.AppendLine(text, Color.Black);
             box.ScrollToCaret();
         }
+
+        
     }
 }

@@ -41,6 +41,12 @@ namespace BCDockerHelper.UI
             refreshTimer.Interval = REFRESH_COUNTER;
             EndScriptCallback(null, null);
             this.btnStopPowershell.Image = global::BCDockerHelper.Resources.GlobalRessources.Stop;
+            GUIHelper.ChangeCursor += this.ChangeCursor;
+        }
+
+        ~MainForm()
+        {
+            GUIHelper.ChangeCursor -= this.ChangeCursor;
         }
 
         private void InitializeContainerLst()
@@ -116,6 +122,17 @@ namespace BCDockerHelper.UI
             cmbDockerImage.SelectedIndex = 0;
         }
 
+        public void ChangeCursor(Cursor c)
+        {
+            if (InvokeRequired)
+            {
+                ChangeCursorHandler changeCursorHandler = new ChangeCursorHandler(ChangeCursor);
+                Invoke(changeCursorHandler, c);
+                return;
+            }
+            this.Cursor = c;
+        }
+
         #region Control Events
         protected override void OnLoad(EventArgs e)
         {
@@ -177,6 +194,12 @@ namespace BCDockerHelper.UI
         {
             PowershellHelper.Instance.StopAllTasks();
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Login();
+        }
+
 
         private void btnRestart_Click(object sender, EventArgs e)
         {
@@ -269,6 +292,14 @@ namespace BCDockerHelper.UI
             image = split[0];
             tag = split.Length > 1 ? split[1] : "";
             cmbDockerImage.Text = image;
+            txtTag.Text = tag;
+            if (image.StartsWith("bcinsider"))
+            {
+                if(MessageBox.Show("This registry requires login, do you want to login now?","Login required", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Login();
+                }
+            }
         }
 
         #endregion
@@ -347,7 +378,7 @@ namespace BCDockerHelper.UI
                 FinishFillContainer(listFiller.Result);
             });
             listFiller.Start();
-
+            ChangeCursor(Cursors.WaitCursor);
         }
 
 
@@ -364,6 +395,7 @@ namespace BCDockerHelper.UI
                 FinishFillImages(listFiller.Result);
             });
             listFiller.Start();
+            ChangeCursor(Cursors.WaitCursor);
         }
 
         private void FinishFillImages(List<Object> images)
@@ -399,6 +431,7 @@ namespace BCDockerHelper.UI
                     }
 
                 SelectItemInImageList();
+                ChangeCursor(Cursors.Default);
             }
         }
         private void FinishFillContainer(List<Object> containers)
@@ -446,6 +479,8 @@ namespace BCDockerHelper.UI
                     }
 
                 SelectItemInContainerList();
+
+                ChangeCursor(Cursors.Default);
             }
         }
 
@@ -562,9 +597,16 @@ namespace BCDockerHelper.UI
             }
         }
 
+        private static void Login()
+        {
+            DockerLoginForm dockerLoginForm = new DockerLoginForm();
+            dockerLoginForm.ShowDialog();
+        }
+
 
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
+
     }
 }

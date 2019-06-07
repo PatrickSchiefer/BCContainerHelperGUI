@@ -72,6 +72,12 @@
     <Compile Include="Classes\Container.cs" />
     <Compile Include="Classes\Tags.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="UI\DockerLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\DockerLoginForm.Designer.cs">
+      <DependentUpon>DockerLoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\InitForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     <Compile Include="UI\TagList.Designer.cs">
       <DependentUpon>TagList.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\DockerLoginForm.resx">
+      <DependentUpon>DockerLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\InitForm.resx">
       <DependentUpon>InitForm.cs</DependentUpon>
     </EmbeddedResource>

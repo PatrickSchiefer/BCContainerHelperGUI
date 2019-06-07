@@ -73,6 +73,7 @@
             this.chkAccepEula = new System.Windows.Forms.CheckBox();
             this.splContainer2 = new System.Windows.Forms.SplitContainer();
             this.rtfOutputLog = new System.Windows.Forms.RichTextBox();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.pnlMiddleDock.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -297,6 +298,7 @@
             // splContainer1.Panel1
             // 
             this.splContainer1.Panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.splContainer1.Panel1.Controls.Add(this.btnLogin);
             this.splContainer1.Panel1.Controls.Add(this.tableLayoutPanel1);
             this.splContainer1.Panel1.Controls.Add(this.btnNewBCContainer);
             this.splContainer1.Panel1.Controls.Add(this.lblAcceptEula);
@@ -602,6 +604,17 @@
             this.rtfOutputLog.TabIndex = 2;
             this.rtfOutputLog.Text = "";
             // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLogin.Location = new System.Drawing.Point(145, 496);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(136, 24);
+            this.btnLogin.TabIndex = 16;
+            this.btnLogin.Text = "Registry login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -685,6 +698,7 @@
         private System.Windows.Forms.TextBox txtTag;
         private System.Windows.Forms.Label lblShortcuts;
         private System.Windows.Forms.ComboBox cmbShortcuts;
+        private System.Windows.Forms.Button btnLogin;
     }
 }
 

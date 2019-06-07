@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace BCDockerHelper.Classes
@@ -17,9 +18,11 @@ namespace BCDockerHelper.Classes
         public string Date { get; set; }
         public static string GetTagFromList(string image)
         {
+            GUIHelper.ChangeCursor(Cursors.WaitCursor);
             string tag = "";
             TagList tl = new TagList();
             tl.SetTags(getTags(image));
+            GUIHelper.ChangeCursor(Cursors.Default);
             if (tl.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 tag = tl.GetSelected();
