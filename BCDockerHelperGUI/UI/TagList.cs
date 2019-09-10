@@ -14,6 +14,7 @@ namespace BCDockerHelper.UI
     public partial class TagList : Form
     {
         string selected;
+        List<string> listtags = new List<string>();
         public TagList()
         {
             InitializeComponent();
@@ -23,8 +24,21 @@ namespace BCDockerHelper.UI
         {
             foreach (Tag t in tags)
             {
-                if (string.IsNullOrEmpty(selected)) selected = t.Name;
-                lstTags.Items.Add(t.Name);
+                listtags.Add(t.Name);
+            }
+            FillList();
+        }
+
+        public void FillList()
+        {
+            lstTags.Items.Clear();
+            foreach (string t in listtags)
+            {
+                if (String.IsNullOrEmpty(txtFilter.Text) || (t.Contains(txtFilter.Text)))
+                {
+                    if (string.IsNullOrEmpty(selected)) selected = t;
+                    lstTags.Items.Add(t);
+                }
             }
         }
 
@@ -36,6 +50,11 @@ namespace BCDockerHelper.UI
         private void LstTags_SelectedIndexChanged(object sender, EventArgs e)
         {
             selected = lstTags.SelectedItem.ToString();
+        }
+
+        private void txtFilter_TextChanged(object sender, EventArgs e)
+        {
+            FillList();
         }
     }
 }

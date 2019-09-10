@@ -30,6 +30,8 @@
         {
             this.lstTags = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtFilter = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lstTags
@@ -38,9 +40,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstTags.FormattingEnabled = true;
-            this.lstTags.Location = new System.Drawing.Point(0, -3);
+            this.lstTags.Location = new System.Drawing.Point(0, 36);
             this.lstTags.Name = "lstTags";
-            this.lstTags.Size = new System.Drawing.Size(342, 316);
+            this.lstTags.Size = new System.Drawing.Size(342, 277);
             this.lstTags.TabIndex = 0;
             this.lstTags.SelectedIndexChanged += new System.EventHandler(this.LstTags_SelectedIndexChanged);
             // 
@@ -55,12 +57,33 @@
             this.button1.Text = "O&K";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(-3, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Filter";
+            // 
+            // txtFilter
+            // 
+            this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFilter.Location = new System.Drawing.Point(33, 5);
+            this.txtFilter.Name = "txtFilter";
+            this.txtFilter.Size = new System.Drawing.Size(309, 20);
+            this.txtFilter.TabIndex = 3;
+            this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
+            // 
             // TagList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(341, 365);
+            this.Controls.Add(this.txtFilter);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lstTags);
             this.Name = "TagList";
@@ -70,6 +93,7 @@
             this.Text = "Select Tag";
             this.TopMost = true;
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -77,5 +101,7 @@
 
         private System.Windows.Forms.ListBox lstTags;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtFilter;
     }
 }
