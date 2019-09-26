@@ -29,5 +29,4 @@ Just Download [Release.zip](../../releases/download/v1.0.0.1/Release.zip) from r
 ## Upcomming Features
 * Publish Apps to Container
 * Support more Parameters from navcontainerhelper
-* Support Windows Authentification
 
