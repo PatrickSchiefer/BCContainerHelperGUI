@@ -14,6 +14,8 @@ namespace BCDockerHelper
     class PowershellHelper
     {
         private const string PasswordRegexPattern = "(ConvertTo-SecureString -String \")(.*)(\" -AsPlainText)";
+
+
         #region Singleton definition
         private static PowershellHelper _instance;
         public static PowershellHelper Instance
@@ -42,8 +44,8 @@ namespace BCDockerHelper
             pipeline.Input.Write("Y");
             StringBuilder command = new StringBuilder();
             command.AppendLine("[System.Threading.Thread]::CurrentThread.CurrentCulture = \"en-US\" ");
-            command.AppendLine("if (-not (Get-InstalledModule -Name navcontainerhelper -MinimumVersion \"0.6.0.15\")) {");
-            command.AppendLine("Install-Module navcontainerhelper -MinimumVersion \"0.6.0.15\" -Scope AllUsers -Force -SkipPublisherCheck");
+            command.AppendLine("if (-not (Get-InstalledModule -Name navcontainerhelper -MinimumVersion \"0.6.2.95\")) {");
+            command.AppendLine("Install-Module navcontainerhelper -MinimumVersion \"0.6.2.95\" -Scope AllUsers -Force -SkipPublisherCheck");
             command.AppendLine("}");
             pipeline.Commands.AddScript(command.ToString());
             pipeline.Invoke();
@@ -157,20 +159,26 @@ namespace BCDockerHelper
 
         public async Task<bool> RestartContainer(string containername)
         {
-            return await PerformPowershellAsync(String.Format("Restart-NAVContainer -containername '{0}'", containername));
+            return await PerformPowershellAsync(String.Format("Restart-BCContainer -containername '{0}'", containername));
         }
         public async Task<bool> StopContainer(string containername)
         {
-            return await PerformPowershellAsync(String.Format("Stop-NAVContainer -containername '{0}'", containername));
+            return await PerformPowershellAsync(String.Format("Stop-BCContainer -containername '{0}'", containername));
         }
         public async Task<bool> StartContainer(string containername)
         {
-            return await PerformPowershellAsync(String.Format("Start-NAVContainer -containername '{0}'", containername));
+            return await PerformPowershellAsync(String.Format("Start-BCContainer -containername '{0}'", containername));
         }
         public async Task<bool> RemoveContainer(string containername)
         {
-            return await PerformPowershellAsync(String.Format("Remove-NAVContainer -containername '{0}'", containername));
+            return await PerformPowershellAsync(String.Format("Remove-BCContainer -containername '{0}'", containername));
         }
+
+        public async Task<bool> RegistryLogin(string registry, string username, string password)
+        {
+            return await PerformPowershellAsync(String.Format("docker login \"{0}\" -u \"{1}\" -p \"{2}\"", registry,username,password));
+        }
+
         public async Task<bool> RemoveImage(string ID)
         {
             return await PerformPowershellAsync(String.Format("docker rmi {0}", ID));
@@ -188,7 +196,7 @@ namespace BCDockerHelper
             StringBuilder command = new StringBuilder();
             command.AppendFormat("$credential = ([PSCredential]::new(\"{0}\", (ConvertTo-SecureString -String \"{1}\" -AsPlainText -Force))) \r\n", username, password);
 
-            command.AppendFormat("New-NavContainer -accept_eula:{0} ", acceptEula ? "$TRUE" : "$FALSE");
+            command.AppendFormat("New-BCContainer -accept_eula:{0} ", acceptEula ? "$TRUE" : "$FALSE");
             command.AppendFormat("-containername {0} ", containername);
             command.Append("-credential $credential ");
             command.AppendFormat("-auth {0}", winAuth? "Windows " : "NavUserPassword ");

@@ -2,6 +2,7 @@
 using BCDockerHelper.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,9 +18,10 @@ namespace BCDockerHelper
         [STAThread]
         static void Main()
         {
-            
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            CheckLocalAppData();
             if (Properties.Settings.Default.FirstLaunch)
             {
                 if (MessageBox.Show(GlobalRessources.AskForStart, "", MessageBoxButtons.YesNo) != DialogResult.Yes)
@@ -34,6 +36,32 @@ namespace BCDockerHelper
             Application.DoEvents();
             Application.Run(new MainForm());
             PowershellHelper.Instance.StopAllTasks();
+            Classes.GUIBindings.Serialize(GuiSettingsPath);
+        }
+
+        public static void CheckLocalAppData()
+        {
+            string path = ApplicationDataPath;
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+        }
+        public static string ApplicationDataPath
+        {
+            get
+            {
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                path = Path.Combine(path, Application.ProductName);
+                return path;
+            }
+        }
+
+        public static string GuiSettingsPath
+        {
+            get
+            {
+                return Path.Combine(ApplicationDataPath, "GUI.xml");
+            }
+
         }
     }
 }

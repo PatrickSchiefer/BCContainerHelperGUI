@@ -25,5 +25,5 @@ namespace BCDockerHelper.UI
             InitializeComponent();
         }
 
-    }
+    }   
 }
