@@ -30,8 +30,8 @@ steps:
       echo ""
       echo ""
       echo "$Content"
-      $Content -match "([0-9]*[.][0-9]*[.][0-9]*[.][0-9]*)"
-      $Version = $Matches[0]
+      $results = $Content | Select-String $AssemblyInfoPath -Pattern "([0-9]*[.][0-9]*[.][0-9]*[.][0-9]*)"
+      $Version = $results.Matches.Value[0]
       echo "##vso[task.setvariable variable=BuildVersion]$Version" 
 
 
