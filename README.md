@@ -6,8 +6,8 @@ I am working on this project in my free time so it could take some time to imple
 
 |Branch|Status|
 |-------|-------|
-|master|![Build Status](https://dev.azure.com/PatrickGrabensteiner/BCContainerHelperGUI/_apis/build/status/PatrickGrabensteiner.BCContainerHelperGUI?branchName=master)|
-|dev|![Build Status](https://dev.azure.com/PatrickGrabensteiner/BCContainerHelperGUI/_apis/build/status/PatrickGrabensteiner.BCContainerHelperGUI?branchName=dev) |
+|master|[![Build Status](https://dev.azure.com/PatrickGrabensteiner/BCContainerHelperGUI/_apis/build/status/PatrickGrabensteiner.BCContainerHelperGUI?branchName=master)](https://dev.azure.com/PatrickGrabensteiner/BCContainerHelperGUI/_build/latest?definitionId=2&branchName=master)|
+|dev|[![Build Status](https://dev.azure.com/PatrickGrabensteiner/BCContainerHelperGUI/_apis/build/status/PatrickGrabensteiner.BCContainerHelperGUI?branchName=dev)](https://dev.azure.com/PatrickGrabensteiner/BCContainerHelperGUI/_build/latest?definitionId=2&branchName=dev)|
 
 ## Installation
 Just Download [Release.zip](../../releases/download/v1.0.0.1/Release.zip) from release Section, unzip and run
@@ -29,5 +29,4 @@ Just Download [Release.zip](../../releases/download/v1.0.0.1/Release.zip) from r
 ## Upcomming Features
 * Publish Apps to Container
 * Support more Parameters from navcontainerhelper
-* Support Windows Authentification
 
