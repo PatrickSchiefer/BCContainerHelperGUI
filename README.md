@@ -4,8 +4,13 @@ During the first start navcontainerhelper is getting installed.
 
 I am working on this project in my free time so it could take some time to implement new Features
 
+|Branch|Status|
+|-------|-------|
+|master|![Build Status](https://dev.azure.com/PatrickGrabensteiner/BCContainerHelperGUI/_apis/build/status/PatrickGrabensteiner.BCContainerHelperGUI?branchName=master)|
+|dev|![Build Status](https://dev.azure.com/PatrickGrabensteiner/BCContainerHelperGUI/_apis/build/status/PatrickGrabensteiner.BCContainerHelperGUI?branchName=dev) |
+
 ## Installation
-Just Download BCDockerHelperGUI.exe and run
+Just Download [Release.zip](../../releases/download/v1.0.0.1/Release.zip) from release Section, unzip and run
 
 ## Requirements
 * Powershell 3.0
@@ -22,7 +27,6 @@ Just Download BCDockerHelperGUI.exe and run
 ![GUI](Images/Screenshot-1.jpg)
 
 ## Upcomming Features
-* Lookup dockertags
 * Publish Apps to Container
 * Support more Parameters from navcontainerhelper
 * Support Windows Authentification
