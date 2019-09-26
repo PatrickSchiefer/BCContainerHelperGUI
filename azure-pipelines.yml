@@ -24,10 +24,10 @@ steps:
     script: |
       $Version =  (Get-Content $(AssemblyInfoPath)) -replace "([0-9]*[.][0-9]*[.][0-9]*)(.0)",'$1.$(Build.BuildId)'
       $Version | Set-Content $(AssemblyInfoPath)
+      Get-Content $(AssemblyInfoPath)
       $Version -match "([0-9]*[.][0-9]*[.][0-9]*[.][0-9]*)"
       $Version = $Matches[0]
       echo "##vso[task.setvariable variable=BuildVersion]$Version" 
-      Get-Content $(AssemblyInfoPath)
 
 
 - task: VSBuild@1
