@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Classes\Container.cs" />
     <Compile Include="Classes\Tags.cs" />
+    <Compile Include="Classes\GUIBindings.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UI\DockerLoginForm.cs">
       <SubType>Form</SubType>

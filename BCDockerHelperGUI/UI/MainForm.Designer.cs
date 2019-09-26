@@ -50,6 +50,7 @@
             this.btnStopPowershell = new System.Windows.Forms.ToolStripButton();
             this.txCurrentScript = new System.Windows.Forms.ToolStripLabel();
             this.splContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblShortcuts = new System.Windows.Forms.Label();
             this.txtContainerName = new System.Windows.Forms.TextBox();
@@ -73,7 +74,6 @@
             this.chkAccepEula = new System.Windows.Forms.CheckBox();
             this.splContainer2 = new System.Windows.Forms.SplitContainer();
             this.rtfOutputLog = new System.Windows.Forms.RichTextBox();
-            this.btnLogin = new System.Windows.Forms.Button();
             this.pnlMiddleDock.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -112,7 +112,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(597, 527);
             this.tabControl1.TabIndex = 2;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -146,7 +146,7 @@
             this.lstContainer.TabIndex = 6;
             this.lstContainer.UseCompatibleStateImageBehavior = false;
             this.lstContainer.View = System.Windows.Forms.View.Details;
-            this.lstContainer.SelectedIndexChanged += new System.EventHandler(this.lstContainer_SelectedIndexChanged);
+            this.lstContainer.SelectedIndexChanged += new System.EventHandler(this.LstContainer_SelectedIndexChanged);
             // 
             // pnlContainerControl
             // 
@@ -170,7 +170,7 @@
             this.btnStart.TabIndex = 2;
             this.btnStart.Text = "Start Container";
             this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
             // btnStop
             // 
@@ -180,7 +180,7 @@
             this.btnStop.TabIndex = 1;
             this.btnStop.Text = "Stop Container";
             this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.btnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
             // btnRestart
             // 
@@ -190,7 +190,7 @@
             this.btnRestart.TabIndex = 0;
             this.btnRestart.Text = "Restart Container";
             this.btnRestart.UseVisualStyleBackColor = true;
-            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
+            this.btnRestart.Click += new System.EventHandler(this.BtnRestart_Click);
             // 
             // btnRemove
             // 
@@ -200,7 +200,7 @@
             this.btnRemove.TabIndex = 3;
             this.btnRemove.Text = "Remove Container";
             this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.btnRemove.Click += new System.EventHandler(this.BtnRemove_Click);
             // 
             // tabPage2
             // 
@@ -231,22 +231,23 @@
             this.btnRemoveImage.TabIndex = 3;
             this.btnRemoveImage.Text = "Remove Image";
             this.btnRemoveImage.UseVisualStyleBackColor = true;
-            this.btnRemoveImage.Click += new System.EventHandler(this.btnRemoveImage_Click);
+            this.btnRemoveImage.Click += new System.EventHandler(this.BtnRemoveImage_Click);
             // 
             // lstImages
             // 
             this.lstImages.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lstImages.HideSelection = false;
             this.lstImages.Location = new System.Drawing.Point(0, 0);
             this.lstImages.Name = "lstImages";
             this.lstImages.Size = new System.Drawing.Size(589, 433);
             this.lstImages.TabIndex = 0;
             this.lstImages.UseCompatibleStateImageBehavior = false;
-            this.lstImages.SelectedIndexChanged += new System.EventHandler(this.lstImages_SelectedIndexChanged);
+            this.lstImages.SelectedIndexChanged += new System.EventHandler(this.LstImages_SelectedIndexChanged);
             // 
             // refreshTimer
             // 
             this.refreshTimer.Interval = 1000;
-            this.refreshTimer.Tick += new System.EventHandler(this.refreshTimer_Tick);
+            this.refreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
             // 
             // toolFooterBar
             // 
@@ -279,7 +280,7 @@
             this.btnStopPowershell.Size = new System.Drawing.Size(51, 22);
             this.btnStopPowershell.Text = "Stop";
             this.btnStopPowershell.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStopPowershell.Click += new System.EventHandler(this.btnStopPowershell_Click);
+            this.btnStopPowershell.Click += new System.EventHandler(this.BtnStopPowershell_Click);
             // 
             // txCurrentScript
             // 
@@ -312,6 +313,17 @@
             this.splContainer1.Size = new System.Drawing.Size(1181, 530);
             this.splContainer1.SplitterDistance = 304;
             this.splContainer1.TabIndex = 12;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLogin.Location = new System.Drawing.Point(145, 496);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(136, 24);
+            this.btnLogin.TabIndex = 16;
+            this.btnLogin.Text = "Registry login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -384,7 +396,6 @@
             this.txtContainerName.Name = "txtContainerName";
             this.txtContainerName.Size = new System.Drawing.Size(143, 20);
             this.txtContainerName.TabIndex = 0;
-            this.txtContainerName.Text = "BCSandbox";
             // 
             // lblContainername
             // 
@@ -537,7 +548,7 @@
             this.btnNewBCContainer.TabIndex = 9;
             this.btnNewBCContainer.Text = "Create BC Container";
             this.btnNewBCContainer.UseVisualStyleBackColor = true;
-            this.btnNewBCContainer.Click += new System.EventHandler(this.btnNewBCContainer_Click);
+            this.btnNewBCContainer.Click += new System.EventHandler(this.BtnNewBCContainer_Click);
             // 
             // lblAcceptEula
             // 
@@ -603,17 +614,6 @@
             this.rtfOutputLog.Size = new System.Drawing.Size(260, 520);
             this.rtfOutputLog.TabIndex = 2;
             this.rtfOutputLog.Text = "";
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLogin.Location = new System.Drawing.Point(145, 496);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(136, 24);
-            this.btnLogin.TabIndex = 16;
-            this.btnLogin.Text = "Registry login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // MainForm
             // 

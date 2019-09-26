@@ -21,7 +21,7 @@ namespace BCDockerHelper.Classes
             GUIHelper.ChangeCursor(Cursors.WaitCursor);
             string tag = "";
             TagList tl = new TagList();
-            tl.SetTags(getTags(image));
+            tl.SetTags(GetTags(image));
             GUIHelper.ChangeCursor(Cursors.Default);
             if (tl.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -30,7 +30,7 @@ namespace BCDockerHelper.Classes
             return tag;
         }
 
-        private static List<Tag> getTags(string image)
+        private static List<Tag> GetTags(string image)
         {
             if(image.StartsWith("microsoft"))
                 return GetFromDefaultRegistry(image);
@@ -41,10 +41,12 @@ namespace BCDockerHelper.Classes
 
         private static List<Tag> DefaultList()
         {
-            List<Tag> result = new List<Tag>();
-            result.Add(new Tag { Name = "w1" });
-            result.Add(new Tag { Name = "at" });
-            result.Add(new Tag { Name = "de" });
+            List<Tag> result = new List<Tag>
+            {
+                new Tag { Name = "w1" },
+                new Tag { Name = "at" },
+                new Tag { Name = "de" }
+            };
             return result;
         }
 
