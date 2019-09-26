@@ -14,12 +14,17 @@ variables:
   solution: 'BCDockerHelperGUI.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  AssemblyInfoPath : './BCDockerHelperGUI/Properties/AssemblyInfo.cs'
 
 steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: '(Get-Content ".\BCDockerHelperGUI\Properties\AssemblyInfo.cs") -replace "([0-9]*[.][0-9]*[.][0-9]*[.])([0])",''$1xxx'' | Set-Content ".\AssemblyInfo.cs"'
+    script: |
+      (Get-Content $(AssemblyInfoPath)) -replace "([0-9]*[.][0-9]*[.][0-9]*[.])([0])",''$1$(Build.BuildId)'' | Set-Content $(AssemblyInfoPath)
+      Get-Content $(AssemblyInfoPath)
+
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
