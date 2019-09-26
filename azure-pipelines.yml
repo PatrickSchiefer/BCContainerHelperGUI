@@ -15,12 +15,14 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   AssemblyInfoPath : './BCDockerHelperGUI/Properties/AssemblyInfo.cs'
+  BuildVersion: ''
 
 steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
     script: |
+      ##vso[task.setvariable variable=BuildVersion] (Get-Content $(AssemblyInfoPath)) -replace "([0-9]*[.][0-9]*[.][0-9]*)(.0)",'$1.$(Build.BuildId)'
       (Get-Content $(AssemblyInfoPath)) -replace "([0-9]*[.][0-9]*[.][0-9]*)(.0)",'$1.$(Build.BuildId)' | Set-Content $(AssemblyInfoPath)
       Get-Content $(AssemblyInfoPath)
 
@@ -41,5 +43,5 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'BCDockerHelperGUI\\bin\\Release\\'
-    ArtifactName: 'drop'
+    ArtifactName: 'bin_$(BuildVersion)'
     publishLocation: 'Container'
