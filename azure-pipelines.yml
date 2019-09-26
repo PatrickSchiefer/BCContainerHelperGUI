@@ -25,12 +25,7 @@ steps:
       $Content =  (Get-Content $(AssemblyInfoPath)) -replace "([0-9]*[.][0-9]*[.][0-9]*)(.0)",'$1.$(Build.BuildId)'
       $Content | Set-Content $(AssemblyInfoPath)
       Get-Content $(AssemblyInfoPath)
-      echo ""
-      echo ""
-      echo ""
-      echo ""
-      echo "$Content"
-      $results = $Content | Select-String $AssemblyInfoPath -Pattern "([0-9]*[.][0-9]*[.][0-9]*[.][0-9]*)"
+      $results = $Content | Select-String -Pattern "([0-9]*[.][0-9]*[.][0-9]*[.][0-9]*)"
       $Version = $results.Matches.Value[0]
       echo "##vso[task.setvariable variable=BuildVersion]$Version" 
 
