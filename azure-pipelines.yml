@@ -21,7 +21,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      (Get-Content $(AssemblyInfoPath)) -replace "([0-9]*[.][0-9]*[.][0-9]*)([.][0])",''$1.$(Build.BuildId)'' | Set-Content $(AssemblyInfoPath)
+      (Get-Content $(AssemblyInfoPath)) -replace "([0-9]*[.][0-9]*[.][0-9]*)(.0)",''$1.$(Build.BuildId)'' | Set-Content $(AssemblyInfoPath)
       Get-Content $(AssemblyInfoPath)
 
 
