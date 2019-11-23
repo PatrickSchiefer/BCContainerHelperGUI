@@ -612,7 +612,7 @@ namespace BCDockerHelper.UI
         private  void SetBindings()
         {
             txtContainerName.DataBindings.Add("Text", Classes.GUIBindings.Instance, "Containername");
-            chkUseWindowsAuth.DataBindings.Add("Checked", Classes.GUIBindings.Instance, "WindowsAuth");
+            //chkUseWindowsAuth.DataBindings.Add("Checked", Classes.GUIBindings.Instance, "WindowsAuth");
             txtUsername.DataBindings.Add("Text", Classes.GUIBindings.Instance, "Username");
             txtPassword.DataBindings.Add("Text", Classes.GUIBindings.Instance, "Password");
             chkIncludeCside.DataBindings.Add("Checked", Classes.GUIBindings.Instance, "IncludeCSide");
