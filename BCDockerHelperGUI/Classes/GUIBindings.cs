@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -35,7 +36,6 @@ namespace BCDockerHelper.Classes
         private string _containername = "BCContainer";
         private bool _windowsAuth = false;
         private string _username;
-        [NonSerialized]
         private string _password;
         private bool _includeCSide = false;
         private string _dockerimage = "mcr.microsoft.com/businesscentral/onprem";
@@ -146,7 +146,10 @@ namespace BCDockerHelper.Classes
 
             using (XmlWriter writer = XmlWriter.Create(filename))
             {
+                string pw = Instance.Password;
+                Instance.Password = ""; // Bugfix do not Seriealize Passwort
                 serializer.Serialize(writer, Instance);
+                Instance.Password = pw;
             }
         }
 
