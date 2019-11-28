@@ -85,6 +85,12 @@
     <Compile Include="UI\InitForm.Designer.cs">
       <DependentUpon>InitForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\LogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\LogForm.Designer.cs">
+      <DependentUpon>LogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\InitForm.resx">
       <DependentUpon>InitForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LogForm.resx">
+      <DependentUpon>LogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

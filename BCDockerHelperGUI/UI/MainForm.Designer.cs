@@ -40,6 +40,7 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
+            this.btnGetLog = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlImageControl = new System.Windows.Forms.Panel();
             this.btnRemoveImage = new System.Windows.Forms.Button();
@@ -74,6 +75,7 @@
             this.chkAccepEula = new System.Windows.Forms.CheckBox();
             this.splContainer2 = new System.Windows.Forms.SplitContainer();
             this.rtfOutputLog = new System.Windows.Forms.RichTextBox();
+            this.btnOpenWebClient = new System.Windows.Forms.Button();
             this.pnlMiddleDock.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -155,6 +157,8 @@
             this.pnlContainerControl.Controls.Add(this.btnStop);
             this.pnlContainerControl.Controls.Add(this.btnRestart);
             this.pnlContainerControl.Controls.Add(this.btnRemove);
+            this.pnlContainerControl.Controls.Add(this.btnGetLog);
+            this.pnlContainerControl.Controls.Add(this.btnOpenWebClient);
             this.pnlContainerControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlContainerControl.Location = new System.Drawing.Point(3, 416);
             this.pnlContainerControl.Name = "pnlContainerControl";
@@ -201,6 +205,16 @@
             this.btnRemove.Text = "Remove Container";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.BtnRemove_Click);
+            // 
+            // btnGetLog
+            // 
+            this.btnGetLog.Location = new System.Drawing.Point(13, 42);
+            this.btnGetLog.Name = "btnGetLog";
+            this.btnGetLog.Size = new System.Drawing.Size(125, 23);
+            this.btnGetLog.TabIndex = 4;
+            this.btnGetLog.Text = "Get Log";
+            this.btnGetLog.UseVisualStyleBackColor = true;
+            this.btnGetLog.Click += new System.EventHandler(this.btnGetLog_Click);
             // 
             // tabPage2
             // 
@@ -615,6 +629,16 @@
             this.rtfOutputLog.TabIndex = 2;
             this.rtfOutputLog.Text = "";
             // 
+            // btnOpenWebClient
+            // 
+            this.btnOpenWebClient.Location = new System.Drawing.Point(144, 42);
+            this.btnOpenWebClient.Name = "btnOpenWebClient";
+            this.btnOpenWebClient.Size = new System.Drawing.Size(125, 23);
+            this.btnOpenWebClient.TabIndex = 5;
+            this.btnOpenWebClient.Text = "Open WebClient";
+            this.btnOpenWebClient.UseVisualStyleBackColor = true;
+            this.btnOpenWebClient.Click += new System.EventHandler(this.btnOpenWebClient_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -699,6 +723,8 @@
         private System.Windows.Forms.Label lblShortcuts;
         private System.Windows.Forms.ComboBox cmbShortcuts;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnGetLog;
+        private System.Windows.Forms.Button btnOpenWebClient;
     }
 }
 
