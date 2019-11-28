@@ -52,7 +52,6 @@ namespace BCDockerHelper
         }
 
 
-
         private void InitializeAsyncScriptInstance()
         {
             asyncScript = PowerShell.Create();
@@ -89,7 +88,7 @@ namespace BCDockerHelper
         public List<Object> GetContainers()
         {
             List<Object> containers = new List<Object>();
-            scriptInstance.AddScript("docker ps -a --format \"{{.ID}};{{.Names}};{{.Status}}\"");
+            scriptInstance.AddScript("docker ps -a --format \"{{.ID}};{{.Names}};{{.Status}};{{.Image}}\"");
             var results = scriptInstance.Invoke();
             foreach (var result in results)
             {
@@ -97,6 +96,7 @@ namespace BCDockerHelper
                 Container container = new Container();
                 container.ID = splitLine[0];
                 container.Containername = splitLine[1];
+                container.Image = splitLine[3];
 
                 string status = splitLine[2];
                 if (status.StartsWith("Exited"))
@@ -155,6 +155,18 @@ namespace BCDockerHelper
             return images;
         }
 
+        public string GetLog(string ID)
+        {
+            StringBuilder log = new StringBuilder();
+            scriptInstance.AddScript(String.Format("docker logs {0}",ID));
+            var results = scriptInstance.Invoke();
+            foreach (var result in results)
+            {
+                log.AppendLine(result.ToString());
+            }
+            return log.ToString();
+        }
+
 
 
         public async Task<bool> RestartContainer(string containername)
@@ -183,6 +195,7 @@ namespace BCDockerHelper
         {
             return await PerformPowershellAsync(String.Format("docker rmi {0}", ID));
         }
+
         public async Task<bool> CreateContainer(string containername, 
                                                 string username, 
                                                 string password, 

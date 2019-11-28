@@ -69,8 +69,14 @@ namespace BCDockerHelper.UI
             });
             lstContainer.Columns.Add(new ColumnHeader
             {
-                Name = (string)GlobalRessources.ContainerListColumn2,
-                Text = (string)GlobalRessources.ContainerListColumn2,
+                Name = (string)GlobalRessources.ContainerListColumn3,
+                Text = (string)GlobalRessources.ContainerListColumn3,
+                Width = -2
+            });
+            lstContainer.Columns.Add(new ColumnHeader
+            {
+                Name = (string)GlobalRessources.ContainerListColumn4,
+                Text = (string)GlobalRessources.ContainerListColumn4,
                 Width = -2
             });
             lstContainer.AutoArrange = true;
@@ -204,6 +210,22 @@ namespace BCDockerHelper.UI
             Login();
         }
 
+        private void btnGetLog_Click(object sender, EventArgs e)
+        {
+            selectedContainerItem.GetLog();
+            LogForm logForm = new LogForm();
+            logForm.Log = selectedContainerItem.Log;
+            logForm.ShowDialog();
+        }
+
+        private void btnOpenWebClient_Click(object sender, EventArgs e)
+        {
+            selectedContainerItem.GetWebClientUrl();
+            if (selectedContainerItem.WebClientUrl != "")
+            {
+                GUIHelper.OpenLink(selectedContainerItem.WebClientUrl);
+            }
+        }
 
         private void BtnRestart_Click(object sender, EventArgs e)
         {
@@ -468,6 +490,7 @@ namespace BCDockerHelper.UI
                             break;
 
                     }
+                    item.SubItems.Add(c.Image);
                     lstContainer.Items.Add(item);
                 }
                 foreach (ColumnHeader ch in lstContainer.Columns)
@@ -559,36 +582,44 @@ namespace BCDockerHelper.UI
                 btnStop.Enabled = false;
                 btnRestart.Enabled = false;
                 btnRemove.Enabled = false;
+                btnGetLog.Enabled = false;
+                btnOpenWebClient.Enabled = false;
             }
             else
             {
                 btnRemove.Enabled = true;
+                btnGetLog.Enabled = true;
                 switch (selectedContainerItem.ContainerStatus)
                 {
                     case ContainerStatus.healthy:
                         btnStart.Enabled = false;
                         btnStop.Enabled = true;
                         btnRestart.Enabled = true;
+                        btnOpenWebClient.Enabled = true;
                         break;
                     case ContainerStatus.unhealthy:
                         btnStart.Enabled = false;
                         btnStop.Enabled = true;
                         btnRestart.Enabled = true;
+                        btnOpenWebClient.Enabled = true;
                         break;
                     case ContainerStatus.stopped:
                         btnStart.Enabled = true;
                         btnStop.Enabled = false;
                         btnRestart.Enabled = false;
+                        btnOpenWebClient.Enabled = false;
                         break;
                     case ContainerStatus.starting:
                         btnStart.Enabled = false;
                         btnStop.Enabled = true;
                         btnRestart.Enabled = false;
+                        btnOpenWebClient.Enabled = true;
                         break;
                     case ContainerStatus.unknown:
                         btnStart.Enabled = false;
                         btnStop.Enabled = false;
                         btnRestart.Enabled = false;
+                        btnOpenWebClient.Enabled = false;
                         break;
                 }
             }

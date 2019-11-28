@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BCDockerHelper
@@ -21,6 +22,11 @@ namespace BCDockerHelper
         public string Containername { get; set; }
         public ContainerStatus ContainerStatus { get; set; }
         public string ContainerStatusText { get; set; }
+        public string Image { get; set; }
+        public string Log { get; set;}
+        public string WebClientUrl { get; set; }
+        
+        private const string WebClientPattern = "(Web Client[ ]*: )(http.*)";
         #endregion
 
         #region Methods
@@ -45,6 +51,26 @@ namespace BCDockerHelper
             await PowershellHelper.Instance.RemoveContainer(Containername);
             return;
         }
+
+        public void GetLog()
+        {
+            Log = PowershellHelper.Instance.GetLog(ID);
+        }
+
+        public void GetWebClientUrl()
+        {
+            GetLog();
+            RegexOptions options = RegexOptions.Multiline;
+            var matches = Regex.Matches(Log, WebClientPattern, options);
+            Match lastMatch = null;
+            foreach (Match m in matches)
+                lastMatch = m;
+            if (lastMatch != null)
+            {
+                WebClientUrl = lastMatch.Groups.Count >= 2 ? lastMatch.Groups[2].Value : "";
+            }
+        }
+
         public override string ToString()
         {
             return Containername;
