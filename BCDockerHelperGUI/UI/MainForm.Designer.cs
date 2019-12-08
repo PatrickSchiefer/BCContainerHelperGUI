@@ -41,6 +41,7 @@
             this.btnRestart = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnGetLog = new System.Windows.Forms.Button();
+            this.btnOpenWebClient = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlImageControl = new System.Windows.Forms.Panel();
             this.btnRemoveImage = new System.Windows.Forms.Button();
@@ -75,7 +76,6 @@
             this.chkAccepEula = new System.Windows.Forms.CheckBox();
             this.splContainer2 = new System.Windows.Forms.SplitContainer();
             this.rtfOutputLog = new System.Windows.Forms.RichTextBox();
-            this.btnOpenWebClient = new System.Windows.Forms.Button();
             this.pnlMiddleDock.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -215,6 +215,16 @@
             this.btnGetLog.Text = "Get Log";
             this.btnGetLog.UseVisualStyleBackColor = true;
             this.btnGetLog.Click += new System.EventHandler(this.btnGetLog_Click);
+            // 
+            // btnOpenWebClient
+            // 
+            this.btnOpenWebClient.Location = new System.Drawing.Point(144, 42);
+            this.btnOpenWebClient.Name = "btnOpenWebClient";
+            this.btnOpenWebClient.Size = new System.Drawing.Size(125, 23);
+            this.btnOpenWebClient.TabIndex = 5;
+            this.btnOpenWebClient.Text = "Open WebClient";
+            this.btnOpenWebClient.UseVisualStyleBackColor = true;
+            this.btnOpenWebClient.Click += new System.EventHandler(this.btnOpenWebClient_Click);
             // 
             // tabPage2
             // 
@@ -628,16 +638,6 @@
             this.rtfOutputLog.Size = new System.Drawing.Size(260, 520);
             this.rtfOutputLog.TabIndex = 2;
             this.rtfOutputLog.Text = "";
-            // 
-            // btnOpenWebClient
-            // 
-            this.btnOpenWebClient.Location = new System.Drawing.Point(144, 42);
-            this.btnOpenWebClient.Name = "btnOpenWebClient";
-            this.btnOpenWebClient.Size = new System.Drawing.Size(125, 23);
-            this.btnOpenWebClient.TabIndex = 5;
-            this.btnOpenWebClient.Text = "Open WebClient";
-            this.btnOpenWebClient.UseVisualStyleBackColor = true;
-            this.btnOpenWebClient.Click += new System.EventHandler(this.btnOpenWebClient_Click);
             // 
             // MainForm
             // 

@@ -31,6 +31,7 @@ namespace BCDockerHelper.UI
         public MainForm()
         {
             InitializeComponent();
+            LoadRessources();
             InitializeContainerLst();
             InitializeImageLst();
             InitializeShortcutCombo();
@@ -45,6 +46,11 @@ namespace BCDockerHelper.UI
             this.btnStopPowershell.Image = global::BCDockerHelper.Resources.GlobalRessources.Stop;
             GUIHelper.ChangeCursor += this.ChangeCursor;
             SetBindings();
+        }
+
+        private void LoadRessources()
+        {
+            this.Icon = GlobalRessources.Icon;
         }
 
         ~MainForm()
