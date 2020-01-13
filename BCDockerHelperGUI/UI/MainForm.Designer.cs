@@ -41,6 +41,7 @@
             this.btnRestart = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnGetLog = new System.Windows.Forms.Button();
+            this.btnOpenWebClient = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlImageControl = new System.Windows.Forms.Panel();
             this.btnRemoveImage = new System.Windows.Forms.Button();
@@ -50,6 +51,7 @@
             this.prgScriptRunning = new System.Windows.Forms.ToolStripProgressBar();
             this.btnStopPowershell = new System.Windows.Forms.ToolStripButton();
             this.txCurrentScript = new System.Windows.Forms.ToolStripLabel();
+            this.lblAbout = new System.Windows.Forms.ToolStripLabel();
             this.splContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnLogin = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -75,7 +77,8 @@
             this.chkAccepEula = new System.Windows.Forms.CheckBox();
             this.splContainer2 = new System.Windows.Forms.SplitContainer();
             this.rtfOutputLog = new System.Windows.Forms.RichTextBox();
-            this.btnOpenWebClient = new System.Windows.Forms.Button();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.pnlMiddleDock.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -216,6 +219,16 @@
             this.btnGetLog.UseVisualStyleBackColor = true;
             this.btnGetLog.Click += new System.EventHandler(this.btnGetLog_Click);
             // 
+            // btnOpenWebClient
+            // 
+            this.btnOpenWebClient.Location = new System.Drawing.Point(144, 42);
+            this.btnOpenWebClient.Name = "btnOpenWebClient";
+            this.btnOpenWebClient.Size = new System.Drawing.Size(125, 23);
+            this.btnOpenWebClient.TabIndex = 5;
+            this.btnOpenWebClient.Text = "Open WebClient";
+            this.btnOpenWebClient.UseVisualStyleBackColor = true;
+            this.btnOpenWebClient.Click += new System.EventHandler(this.btnOpenWebClient_Click);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.pnlImageControl);
@@ -269,6 +282,9 @@
             this.toolFooterBar.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolFooterBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolFooterBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator2,
+            this.lblAbout,
+            this.toolStripSeparator1,
             this.prgScriptRunning,
             this.btnStopPowershell,
             this.txCurrentScript});
@@ -299,8 +315,18 @@
             // txCurrentScript
             // 
             this.txCurrentScript.Name = "txCurrentScript";
-            this.txCurrentScript.Size = new System.Drawing.Size(86, 22);
-            this.txCurrentScript.Text = "toolStripLabel1";
+            this.txCurrentScript.Size = new System.Drawing.Size(87, 22);
+            this.txCurrentScript.Text = "txCurrentScript";
+            // 
+            // lblAbout
+            // 
+            this.lblAbout.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.lblAbout.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lblAbout.Name = "lblAbout";
+            this.lblAbout.Size = new System.Drawing.Size(40, 22);
+            this.lblAbout.Text = "About";
+            this.lblAbout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblAbout.Click += new System.EventHandler(this.lblAbout_Click);
             // 
             // splContainer1
             // 
@@ -629,15 +655,15 @@
             this.rtfOutputLog.TabIndex = 2;
             this.rtfOutputLog.Text = "";
             // 
-            // btnOpenWebClient
+            // toolStripSeparator1
             // 
-            this.btnOpenWebClient.Location = new System.Drawing.Point(144, 42);
-            this.btnOpenWebClient.Name = "btnOpenWebClient";
-            this.btnOpenWebClient.Size = new System.Drawing.Size(125, 23);
-            this.btnOpenWebClient.TabIndex = 5;
-            this.btnOpenWebClient.Text = "Open WebClient";
-            this.btnOpenWebClient.UseVisualStyleBackColor = true;
-            this.btnOpenWebClient.Click += new System.EventHandler(this.btnOpenWebClient_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // MainForm
             // 
@@ -725,6 +751,9 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnGetLog;
         private System.Windows.Forms.Button btnOpenWebClient;
+        private System.Windows.Forms.ToolStripLabel lblAbout;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

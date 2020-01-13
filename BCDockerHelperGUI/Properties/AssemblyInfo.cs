@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BCDockerHelper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Patrick Grabensteiner")]
 [assembly: AssemblyProduct("BCDockerHelperGUI")]
 [assembly: AssemblyCopyright("Copyright © Patrick Grabensteiner")]
 [assembly: AssemblyTrademark("")]
