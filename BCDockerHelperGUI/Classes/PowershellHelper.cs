@@ -186,6 +186,12 @@ namespace BCDockerHelper
             return await PerformPowershellAsync(String.Format("Remove-BCContainer -containername '{0}'", containername));
         }
 
+        public async Task<bool> ImportLicenseToContainer(string containername, string licensePath)
+        {
+            return await PerformPowershellAsync(String.Format("Import-BCContainerLicense -containerName '{0}' -licenseFile '{1}'", containername, licensePath));
+        }
+
+
         public async Task<bool> RegistryLogin(string registry, string username, string password)
         {
             return await PerformPowershellAsync(String.Format("docker login \"{0}\" -u \"{1}\" -p \"{2}\"", registry,username,password));

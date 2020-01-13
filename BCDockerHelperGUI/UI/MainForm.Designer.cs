@@ -48,10 +48,12 @@
             this.lstImages = new System.Windows.Forms.ListView();
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.toolFooterBar = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.lblAbout = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.prgScriptRunning = new System.Windows.Forms.ToolStripProgressBar();
             this.btnStopPowershell = new System.Windows.Forms.ToolStripButton();
             this.txCurrentScript = new System.Windows.Forms.ToolStripLabel();
-            this.lblAbout = new System.Windows.Forms.ToolStripLabel();
             this.splContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnLogin = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -77,8 +79,7 @@
             this.chkAccepEula = new System.Windows.Forms.CheckBox();
             this.splContainer2 = new System.Windows.Forms.SplitContainer();
             this.rtfOutputLog = new System.Windows.Forms.RichTextBox();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnImportLicense = new System.Windows.Forms.Button();
             this.pnlMiddleDock.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -160,6 +161,7 @@
             this.pnlContainerControl.Controls.Add(this.btnStop);
             this.pnlContainerControl.Controls.Add(this.btnRestart);
             this.pnlContainerControl.Controls.Add(this.btnRemove);
+            this.pnlContainerControl.Controls.Add(this.btnImportLicense);
             this.pnlContainerControl.Controls.Add(this.btnGetLog);
             this.pnlContainerControl.Controls.Add(this.btnOpenWebClient);
             this.pnlContainerControl.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -211,7 +213,7 @@
             // 
             // btnGetLog
             // 
-            this.btnGetLog.Location = new System.Drawing.Point(13, 42);
+            this.btnGetLog.Location = new System.Drawing.Point(144, 42);
             this.btnGetLog.Name = "btnGetLog";
             this.btnGetLog.Size = new System.Drawing.Size(125, 23);
             this.btnGetLog.TabIndex = 4;
@@ -221,7 +223,7 @@
             // 
             // btnOpenWebClient
             // 
-            this.btnOpenWebClient.Location = new System.Drawing.Point(144, 42);
+            this.btnOpenWebClient.Location = new System.Drawing.Point(275, 42);
             this.btnOpenWebClient.Name = "btnOpenWebClient";
             this.btnOpenWebClient.Size = new System.Drawing.Size(125, 23);
             this.btnOpenWebClient.TabIndex = 5;
@@ -294,6 +296,26 @@
             this.toolFooterBar.Size = new System.Drawing.Size(1181, 25);
             this.toolFooterBar.TabIndex = 11;
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // lblAbout
+            // 
+            this.lblAbout.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.lblAbout.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lblAbout.Name = "lblAbout";
+            this.lblAbout.Size = new System.Drawing.Size(40, 22);
+            this.lblAbout.Text = "About";
+            this.lblAbout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblAbout.Click += new System.EventHandler(this.lblAbout_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // prgScriptRunning
             // 
             this.prgScriptRunning.Name = "prgScriptRunning";
@@ -317,16 +339,6 @@
             this.txCurrentScript.Name = "txCurrentScript";
             this.txCurrentScript.Size = new System.Drawing.Size(87, 22);
             this.txCurrentScript.Text = "txCurrentScript";
-            // 
-            // lblAbout
-            // 
-            this.lblAbout.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.lblAbout.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lblAbout.Name = "lblAbout";
-            this.lblAbout.Size = new System.Drawing.Size(40, 22);
-            this.lblAbout.Text = "About";
-            this.lblAbout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblAbout.Click += new System.EventHandler(this.lblAbout_Click);
             // 
             // splContainer1
             // 
@@ -655,15 +667,15 @@
             this.rtfOutputLog.TabIndex = 2;
             this.rtfOutputLog.Text = "";
             // 
-            // toolStripSeparator1
+            // btnImportLicense
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.btnImportLicense.Location = new System.Drawing.Point(13, 42);
+            this.btnImportLicense.Name = "btnImportLicense";
+            this.btnImportLicense.Size = new System.Drawing.Size(125, 23);
+            this.btnImportLicense.TabIndex = 6;
+            this.btnImportLicense.Text = "Import License";
+            this.btnImportLicense.UseVisualStyleBackColor = true;
+            this.btnImportLicense.Click += new System.EventHandler(this.btnImportLicense_Click);
             // 
             // MainForm
             // 
@@ -754,6 +766,7 @@
         private System.Windows.Forms.ToolStripLabel lblAbout;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Button btnImportLicense;
     }
 }
 
