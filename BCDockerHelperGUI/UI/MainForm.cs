@@ -134,6 +134,7 @@ namespace BCDockerHelper.UI
         {
             cmbDockerImage.Items.Add("mcr.microsoft.com/businesscentral/onprem");
             cmbDockerImage.Items.Add("mcr.microsoft.com/businesscentral/sandbox");
+            cmbDockerImage.Items.Add("mcr.microsoft.com/dynamicsnav");
         }
 
         public void ChangeCursor(Cursor c)
