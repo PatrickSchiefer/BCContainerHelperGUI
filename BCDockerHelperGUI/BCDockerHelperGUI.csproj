@@ -47,6 +47,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
@@ -73,6 +78,12 @@
     <Compile Include="Classes\Tags.cs" />
     <Compile Include="Classes\GUIBindings.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="UI\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\DockerLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +124,9 @@
     <Compile Include="UI\TagList.Designer.cs">
       <DependentUpon>TagList.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\DockerLoginForm.resx">
       <DependentUpon>DockerLoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +189,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DotDotDot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

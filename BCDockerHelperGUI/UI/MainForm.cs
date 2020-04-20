@@ -31,6 +31,7 @@ namespace BCDockerHelper.UI
         public MainForm()
         {
             InitializeComponent();
+            LoadRessources();
             InitializeContainerLst();
             InitializeImageLst();
             InitializeShortcutCombo();
@@ -45,6 +46,11 @@ namespace BCDockerHelper.UI
             this.btnStopPowershell.Image = global::BCDockerHelper.Resources.GlobalRessources.Stop;
             GUIHelper.ChangeCursor += this.ChangeCursor;
             SetBindings();
+        }
+
+        private void LoadRessources()
+        {
+            this.Icon = GlobalRessources.Icon;
         }
 
         ~MainForm()
@@ -128,6 +134,7 @@ namespace BCDockerHelper.UI
         {
             cmbDockerImage.Items.Add("mcr.microsoft.com/businesscentral/onprem");
             cmbDockerImage.Items.Add("mcr.microsoft.com/businesscentral/sandbox");
+            cmbDockerImage.Items.Add("mcr.microsoft.com/dynamicsnav");
         }
 
         public void ChangeCursor(Cursor c)
@@ -256,6 +263,26 @@ namespace BCDockerHelper.UI
         private void BtnTag_Click(object sender, EventArgs e)
         {
             txtTag.Text = Classes.Tag.GetTagFromList(cmbDockerImage.Text);
+        }
+        private void lblAbout_Click(object sender, EventArgs e)
+        {
+            AboutForm about = new AboutForm();
+            about.ShowDialog();
+        }
+
+
+        private void btnImportLicense_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "BC License file|*.flf";
+            DialogResult dialogResult = openFileDialog.ShowDialog();
+            
+            if (dialogResult == DialogResult.OK)
+            {
+                string filename = openFileDialog.FileName;
+                TaskFactory tf = new TaskFactory();
+                var result = selectedContainerItem.ImportLicense(filename);
+            }
         }
 
         private void BtnNewBCContainer_Click(object sender, EventArgs e)
@@ -595,30 +622,35 @@ namespace BCDockerHelper.UI
                         btnStart.Enabled = false;
                         btnStop.Enabled = true;
                         btnRestart.Enabled = true;
+                        btnImportLicense.Enabled = true;
                         btnOpenWebClient.Enabled = true;
                         break;
                     case ContainerStatus.unhealthy:
                         btnStart.Enabled = false;
                         btnStop.Enabled = true;
                         btnRestart.Enabled = true;
+                        btnImportLicense.Enabled = true;
                         btnOpenWebClient.Enabled = true;
                         break;
                     case ContainerStatus.stopped:
                         btnStart.Enabled = true;
                         btnStop.Enabled = false;
                         btnRestart.Enabled = false;
+                        btnImportLicense.Enabled = false;
                         btnOpenWebClient.Enabled = false;
                         break;
                     case ContainerStatus.starting:
                         btnStart.Enabled = false;
                         btnStop.Enabled = true;
                         btnRestart.Enabled = false;
+                        btnImportLicense.Enabled = false;
                         btnOpenWebClient.Enabled = true;
                         break;
                     case ContainerStatus.unknown:
                         btnStart.Enabled = false;
                         btnStop.Enabled = false;
                         btnRestart.Enabled = false;
+                        btnImportLicense.Enabled = false;
                         btnOpenWebClient.Enabled = false;
                         break;
                 }
@@ -654,6 +686,7 @@ namespace BCDockerHelper.UI
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
+
 
     }
 }

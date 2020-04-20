@@ -52,6 +52,12 @@ namespace BCDockerHelper
             return;
         }
 
+        public async Task ImportLicense(string licensePath)
+        {
+            await PowershellHelper.Instance.ImportLicenseToContainer(Containername, licensePath);
+            return;
+        }
+
         public void GetLog()
         {
             Log = PowershellHelper.Instance.GetLog(ID);
