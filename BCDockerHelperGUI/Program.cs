@@ -16,7 +16,7 @@ namespace BCDockerHelper
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
 
             Application.EnableVisualStyles();
@@ -30,6 +30,7 @@ namespace BCDockerHelper
                     return;
                 }
             }
+            ParseArguments(args);
             Properties.Settings.Default.FirstLaunch = false;
             Properties.Settings.Default.Save();
             InitForm.Instance.Show();
@@ -62,6 +63,15 @@ namespace BCDockerHelper
                 return Path.Combine(ApplicationDataPath, "GUI.xml");
             }
 
+        }
+
+        public static void ParseArguments(string[] args)
+        {
+            bool skipContainerHelper = args.AsQueryable().Count(s => s.Equals("-skipContainerHelper")).Equals(1);
+            if (skipContainerHelper)
+            {
+                PowershellHelper.SkipInstallContainerHelper = true;
+            }
         }
     }
 }

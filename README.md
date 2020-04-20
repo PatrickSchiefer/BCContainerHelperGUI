@@ -30,3 +30,8 @@ Just Download [Release.zip](../../releases/download/v1.0.0.1/Release.zip) from r
 * Publish Apps to Container
 * Support more Parameters from navcontainerhelper
 
+## Command Line Arguments
+|Argument|Description|
+|--------|-----------|
+|-skipContainerHelper|Skips the Installation of NavContainerHelper on Startup
+
