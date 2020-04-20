@@ -18,6 +18,7 @@ namespace BCDockerHelper
 
         #region Singleton definition
         private static PowershellHelper _instance;
+        public static bool SkipInstallContainerHelper { get; set; }
         public static PowershellHelper Instance
         {
             get
@@ -34,7 +35,8 @@ namespace BCDockerHelper
             scriptInstance.Streams.Error.DataAdded += ErrorDataAdded;
             scriptInstance.Streams.Information.DataAdded += MessageDataAdded;
             scriptInstance.Streams.Progress.DataAdded += ProgressDataAdded;
-            InstallNavContainerHelper();
+            if (!SkipInstallContainerHelper)
+                InstallNavContainerHelper();
             InitializeAsyncScriptInstance();
         }
 
@@ -43,6 +45,7 @@ namespace BCDockerHelper
             var pipeline = scriptInstance.Runspace.CreatePipeline();
             pipeline.Input.Write("Y");
             StringBuilder command = new StringBuilder();
+            command.AppendLine("Set-ExecutionPolicy -ExecutionPolicy Unrestricted");
             command.AppendLine("[System.Threading.Thread]::CurrentThread.CurrentCulture = \"en-US\" ");
             command.AppendLine("if (-not (Get-InstalledModule -Name navcontainerhelper -MinimumVersion \"0.6.2.95\")) {");
             command.AppendLine("Install-Module navcontainerhelper -MinimumVersion \"0.6.2.95\" -Scope AllUsers -Force -SkipPublisherCheck");
