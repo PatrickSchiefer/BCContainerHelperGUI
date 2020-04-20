@@ -42,6 +42,7 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnGetLog = new System.Windows.Forms.Button();
             this.btnOpenWebClient = new System.Windows.Forms.Button();
+
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlImageControl = new System.Windows.Forms.Panel();
             this.btnRemoveImage = new System.Windows.Forms.Button();
@@ -80,6 +81,7 @@
             this.splContainer2 = new System.Windows.Forms.SplitContainer();
             this.rtfOutputLog = new System.Windows.Forms.RichTextBox();
             this.btnImportLicense = new System.Windows.Forms.Button();
+
             this.pnlMiddleDock.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -214,6 +216,7 @@
             // btnGetLog
             // 
             this.btnGetLog.Location = new System.Drawing.Point(144, 42);
+
             this.btnGetLog.Name = "btnGetLog";
             this.btnGetLog.Size = new System.Drawing.Size(125, 23);
             this.btnGetLog.TabIndex = 4;
@@ -767,6 +770,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Button btnImportLicense;
+
     }
 }
 
