@@ -24,5 +24,11 @@ namespace BCDockerHelper.UI
                 rtfLog.Text = value;
             }
         }
+
+        private void LogForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
+        }
     }
 }

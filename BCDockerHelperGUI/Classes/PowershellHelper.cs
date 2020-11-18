@@ -38,6 +38,7 @@ namespace BCDockerHelper
             if (!SkipInstallContainerHelper)
                 InstallNavContainerHelper();
             InitializeAsyncScriptInstance();
+            InitializeSyncScriptInstance();
         }
 
         private void InstallNavContainerHelper()
@@ -65,6 +66,12 @@ namespace BCDockerHelper
             asyncScript.AddScript("Set-ExecutionPolicy -ExecutionPolicy Unrestricted");
             asyncScript.Invoke();
         }
+        private void InitializeSyncScriptInstance()
+        {
+            syncScript = PowerShell.Create();
+            syncScript.AddScript("Set-ExecutionPolicy -ExecutionPolicy Unrestricted");
+            syncScript.Invoke();
+        }
 
         private void InitializePSO()
         {
@@ -77,6 +84,7 @@ namespace BCDockerHelper
 
         #region Object variables
         private PowerShell scriptInstance;
+        private PowerShell syncScript;
         private PowerShell asyncScript;
         private PSDataCollection<PSObject> pso;
 
@@ -161,13 +169,25 @@ namespace BCDockerHelper
         public string GetLog(string ID)
         {
             StringBuilder log = new StringBuilder();
-            scriptInstance.AddScript(String.Format("docker logs {0}",ID));
-            var results = scriptInstance.Invoke();
+            syncScript.AddScript(String.Format("docker logs {0}", ID));
+            var results = syncScript.Invoke();
             foreach (var result in results)
             {
                 log.AppendLine(result.ToString());
             }
             return log.ToString();
+        }
+
+        public string ExecuteScript(string scriptContent)
+        {
+            StringBuilder resultText = new StringBuilder();
+            syncScript.AddScript(scriptContent);
+            var results = syncScript.Invoke();
+            foreach (var result in results)
+            {
+                resultText.AppendLine(result.ToString());
+            }
+            return resultText.ToString();
         }
 
 

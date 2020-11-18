@@ -75,8 +75,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Container.cs" />
+    <Compile Include="Classes\PowerShellCommandBuilder.cs" />
     <Compile Include="Classes\Tags.cs" />
     <Compile Include="Classes\GUIBindings.cs" />
+    <Compile Include="Resources\GlobalRessources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalRessources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="UI\AboutForm.cs">
       <SubType>Form</SubType>
@@ -108,11 +114,6 @@
     <Compile Include="UI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Resources\GlobalRessources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GlobalRessources.resx</DependentUpon>
-    </Compile>
     <Compile Include="UI\GUIHelper.cs" />
     <Compile Include="Classes\Image.cs" />
     <Compile Include="Classes\PowershellHelper.cs" />
@@ -141,6 +142,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\GlobalRessources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>GlobalRessources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -192,6 +194,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GetParam.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

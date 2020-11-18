@@ -31,5 +31,11 @@ namespace BCDockerHelper.UI
             lblName.Text = Assembly.GetExecutingAssembly().GetName().Name.ToString();
 
         }
+
+        private void AboutForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
+        }
     }
 }

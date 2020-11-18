@@ -143,6 +143,33 @@ namespace BCDockerHelper.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die function Get-FunctionDefaultParameter {
+        ///    &lt;#
+        ///    .SYNOPSIS
+        ///    This is a function that will find all of the default parameter names and values from a given function.
+        ///
+        ///
+        ///    .EXAMPLE
+        ///    PS&gt; Get-FunctionDefaultParameter -FunctionName Get-Something
+        ///
+        ///    .PARAMETER FuntionName
+        ///    A mandatory string parameter representing the name of the function to find default parameters to.
+        ///
+        ///    #&gt;
+        ///    [CmdletBinding()]
+        ///    [OutputType([hashtable])]
+        ///    param
+        ///    (
+        ///        [Parameter(Mandatory)]
+        ///        [ [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        internal static string GetParam {
+            get {
+                return ResourceManager.GetString("GetParam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
         /// </summary>
         internal static System.Drawing.Icon Icon {

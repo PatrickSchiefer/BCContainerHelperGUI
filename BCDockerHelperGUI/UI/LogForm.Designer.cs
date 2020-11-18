@@ -53,6 +53,7 @@
             this.Controls.Add(this.rtfLog);
             this.Name = "LogForm";
             this.Text = "LogForm";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LogForm_KeyDown);
             this.ResumeLayout(false);
 
         }

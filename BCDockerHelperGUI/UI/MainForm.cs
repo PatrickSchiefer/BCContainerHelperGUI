@@ -1,4 +1,5 @@
-﻿using BCDockerHelper.Properties;
+﻿using BCDockerHelper.Classes;
+using BCDockerHelper.Properties;
 using BCDockerHelper.Resources;
 using BCDockerHelper.UI;
 using System;
@@ -17,6 +18,7 @@ namespace BCDockerHelper.UI
     delegate void FillHandler(List<Object> x);
     public partial class MainForm : Form
     {
+
         readonly int REFRESH_COUNTER = 30000;
 
         List<Object> Containers = new List<Object>();
@@ -287,6 +289,9 @@ namespace BCDockerHelper.UI
 
         private void BtnNewBCContainer_Click(object sender, EventArgs e)
         {
+            PowerShellCommandBuilder commandBuilder = new PowerShellCommandBuilder("New-NAVContainer");
+            /*
+
             TaskFactory tf = new TaskFactory();
             
             var result = PowershellHelper.Instance.CreateContainer(txtContainerName.Text,
@@ -297,7 +302,7 @@ namespace BCDockerHelper.UI
                                                         cmbDockerImage.Text,
                                                         txtTag.Text,
                                                         chkUseWindowsAuth.Checked);
-            tf.FromAsync(result, x => { FillContainerListBox(); });
+            tf.FromAsync(result, x => { FillContainerListBox(); });*/
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
