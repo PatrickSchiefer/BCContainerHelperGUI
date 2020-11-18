@@ -690,9 +690,9 @@ namespace BCDockerHelper.UI
             }
             else if (lstContainer.SelectedIndices.Count > 1)
             {
-                btnStart.Enabled = false;
+                btnStart.Enabled = true;
                 btnStop.Enabled = true;
-                btnRestart.Enabled = false;
+                btnRestart.Enabled = true;
                 btnRemove.Enabled = true;
                 btnGetLog.Enabled = false;
                 btnOpenWebClient.Enabled = false;
