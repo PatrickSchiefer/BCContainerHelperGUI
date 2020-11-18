@@ -21,7 +21,11 @@ namespace BCDockerHelper.UI
 
         List<Object> Containers = new List<Object>();
         List<Object> Images = new List<Object>();
+        Stack<Container> startList = new Stack<Container>();
         Stack<Container> stopList = new Stack<Container>();
+        Stack<Container> removeList = new Stack<Container>();
+        Stack<Container> restartList = new Stack<Container>();
+        Stack<Image> removeImageList = new Stack<Image>();
         Container selectedContainerItem = null;
         Image selectedImageItem = null;
         Task<List<object>> listFiller;
@@ -235,12 +239,6 @@ namespace BCDockerHelper.UI
             }
         }
 
-        private void BtnRestart_Click(object sender, EventArgs e)
-        {
-            TaskFactory tf = new TaskFactory();
-            var result = selectedContainerItem.Restart();
-            tf.FromAsync(result, x => { FillContainerListBox(); });   
-        }
 
         private void BtnStop_Click(object sender, EventArgs e)
         {
@@ -261,16 +259,56 @@ namespace BCDockerHelper.UI
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            TaskFactory tf = new TaskFactory();
-            var result = selectedContainerItem.Start();
-            tf.FromAsync(result, x => { FillContainerListBox(); });
+            if (lstContainer.SelectedItems.Count <= 1)
+            {
+                startList.Push(selectedContainerItem);
+            }
+            else
+            {
+                for (int i = 0; i < lstContainer.SelectedIndices.Count; i++)
+                {
+                    int selectedIndex = lstContainer.SelectedIndices[i];
+                    startList.Push(FindContainerWithID(lstContainer.Items[selectedIndex].Text));
+                }
+            }
+            StartContainerList();
         }
+
+        private void BtnRestart_Click(object sender, EventArgs e)
+        {
+            if (lstContainer.SelectedItems.Count <= 1)
+            {
+                restartList.Push(selectedContainerItem);
+            }
+            else
+            {
+                for (int i = 0; i < lstContainer.SelectedIndices.Count; i++)
+                {
+                    int selectedIndex = lstContainer.SelectedIndices[i];
+                    restartList.Push(FindContainerWithID(lstContainer.Items[selectedIndex].Text));
+                }
+            }
+            RestartContainerList();
+        }
+
+
         private void BtnRemove_Click(object sender, EventArgs e)
         {
-            TaskFactory tf = new TaskFactory();
-            var result = selectedContainerItem.Remove();
-            tf.FromAsync(result, x => { FillContainerListBox(); });
+            if (lstContainer.SelectedItems.Count <= 1)
+            {
+                removeList.Push(selectedContainerItem);
+            }
+            else
+            {
+                for (int i = 0; i < lstContainer.SelectedIndices.Count; i++)
+                {
+                    int selectedIndex = lstContainer.SelectedIndices[i];
+                    removeList.Push(FindContainerWithID(lstContainer.Items[selectedIndex].Text));
+                }
+            }
+            RemoveContainerList();
         }
+
         private void BtnTag_Click(object sender, EventArgs e)
         {
             txtTag.Text = Classes.Tag.GetTagFromList(cmbDockerImage.Text);
@@ -332,11 +370,20 @@ namespace BCDockerHelper.UI
         }
         private void BtnRemoveImage_Click(object sender, EventArgs e)
         {
-            TaskFactory tf = new TaskFactory();
-            var result = selectedImageItem.Remove();
-            tf.FromAsync(result, x => { FillImagesListBox(); });
+            if (lstImages.SelectedItems.Count <= 1)
+            {
+                removeImageList.Push(selectedImageItem);
+            }
+            else
+            {
+                for (int i = 0; i < lstImages.SelectedIndices.Count; i++)
+                {
+                    int selectedIndex = lstImages.SelectedIndices[i];
+                    removeImageList.Push(FindImageWithID(lstImages.Items[selectedIndex].Text));
+                }
+            }
+            RemoveImageList();
         }
-
 
         private void ChkUseWindowsAuth_CheckedChanged(object sender, EventArgs e)
         {
@@ -419,13 +466,20 @@ namespace BCDockerHelper.UI
 
         private void FillActiveListBox()
         {
-            if (tabControl1.SelectedTab.Equals(tabPage1))
+            if (this.InvokeRequired)
             {
-                FillContainerListBox();
+                Invoke(new MethodInvoker(FillActiveListBox));
             }
-            else if (tabControl1.SelectedTab.Equals(tabPage2))
+            else
             {
-                FillImagesListBox();
+                if (tabControl1.SelectedTab.Equals(tabPage1))
+                {
+                    FillContainerListBox();
+                }
+                else if (tabControl1.SelectedTab.Equals(tabPage2))
+                {
+                    FillImagesListBox();
+                }
             }
         }
 
@@ -590,11 +644,7 @@ namespace BCDockerHelper.UI
         private void ContainerSelectionChanged(string ID)
         {
             selectedContainerItem = FindContainerWithID(ID);
-            if (selectedContainerItem != null)
-            {
                 RefreshButtons();
-                return;
-            }
         }
 
         private Container FindContainerWithID(string ID)
@@ -611,15 +661,20 @@ namespace BCDockerHelper.UI
 
         private void ImageSelectionChanged(string ID)
         {
+            selectedImageItem = FindImageWithID(ID);
+            RefreshButtons();
+        }
+
+        private Image FindImageWithID(string ID)
+        {
             foreach (Image i in Images)
             {
                 if (i.ID.Equals(ID))
                 {
-                    selectedImageItem = i;
-                    RefreshButtons();
-                    return;
+                    return i;
                 }
             }
+            return null;
         }
 
         private void RefreshButtons()
@@ -633,12 +688,12 @@ namespace BCDockerHelper.UI
                 btnGetLog.Enabled = false;
                 btnOpenWebClient.Enabled = false;
             }
-            else if (lstContainer.SelectedIndices.Count > 0)
+            else if (lstContainer.SelectedIndices.Count > 1)
             {
                 btnStart.Enabled = false;
                 btnStop.Enabled = true;
                 btnRestart.Enabled = false;
-                btnRemove.Enabled = false;
+                btnRemove.Enabled = true;
                 btnGetLog.Enabled = false;
                 btnOpenWebClient.Enabled = false;
             }
@@ -701,7 +756,64 @@ namespace BCDockerHelper.UI
             DockerLoginForm dockerLoginForm = new DockerLoginForm();
             dockerLoginForm.ShowDialog();
         }
+        private void StopContainerList()
+        {
+            if (stopList.Count > 0)
+            {
+                Container c = stopList.Pop();
+                TaskFactory tf = new TaskFactory();
+                var result = c.Stop();
+                tf.FromAsync(result, x => { StopContainerList(); });
+            }
+            FillActiveListBox();
+        }
 
+        private void StartContainerList()
+        {
+            if (startList.Count > 0)
+            {
+                Container c = startList.Pop();
+                TaskFactory tf = new TaskFactory();
+                var result = c.Start();
+                tf.FromAsync(result, x => { StartContainerList(); });
+            }
+            FillActiveListBox();
+        }
+
+        private void RestartContainerList()
+        {
+            if (restartList.Count > 0)
+            {
+                Container c = restartList.Pop();
+                TaskFactory tf = new TaskFactory();
+                var result = selectedContainerItem.Restart();
+                tf.FromAsync(result, x => { RestartContainerList(); });
+            }
+            FillActiveListBox();
+        }
+
+        private void RemoveContainerList()
+        {
+            if (removeList.Count > 0)
+            {
+                Container c = removeList.Pop();
+                TaskFactory tf = new TaskFactory();
+                var result = c.Remove();
+                tf.FromAsync(result, x => { RemoveContainerList(); });
+            }
+            FillActiveListBox();
+        }
+        private void RemoveImageList()
+        {
+            if (removeImageList.Count > 0)
+            {
+                Image i = removeImageList.Pop();
+                TaskFactory tf = new TaskFactory();
+                var result = i.Remove();
+                tf.FromAsync(result, x => { RemoveImageList(); });
+            }
+            FillActiveListBox();
+        }
         private  void SetBindings()
         {
             txtContainerName.DataBindings.Add("Text", Classes.GUIBindings.Instance, "Containername");
@@ -714,17 +826,7 @@ namespace BCDockerHelper.UI
         }
 
 
-        private void StopContainerList()
-        {
-            if (stopList.Count > 0)
-            {
-                Container c = stopList.Pop();
-                TaskFactory tf = new TaskFactory();
-                var result = c.Stop();
-                tf.FromAsync(result, x => { StopContainerList(); });
-            }
-            FillContainerListBox();
-        }
+
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
