@@ -21,6 +21,7 @@ namespace BCDockerHelper.UI
 
         List<Object> Containers = new List<Object>();
         List<Object> Images = new List<Object>();
+        Stack<Container> stopList = new Stack<Container>();
         Container selectedContainerItem = null;
         Image selectedImageItem = null;
         Task<List<object>> listFiller;
@@ -243,9 +244,19 @@ namespace BCDockerHelper.UI
 
         private void BtnStop_Click(object sender, EventArgs e)
         {
-            TaskFactory tf = new TaskFactory();
-            var result = selectedContainerItem.Stop();
-            tf.FromAsync(result, x => { FillContainerListBox(); });
+            if (lstContainer.SelectedItems.Count <= 1)
+            {
+                stopList.Push(selectedContainerItem);
+            }
+            else
+            {
+                for(int i = 0; i < lstContainer.SelectedIndices.Count; i++)
+                {
+                    int selectedIndex = lstContainer.SelectedIndices[i];
+                    stopList.Push(FindContainerWithID(lstContainer.Items[selectedIndex].Text));
+                }
+            }
+            StopContainerList();
         }
 
         private void BtnStart_Click(object sender, EventArgs e)
@@ -578,16 +589,26 @@ namespace BCDockerHelper.UI
 
         private void ContainerSelectionChanged(string ID)
         {
+            selectedContainerItem = FindContainerWithID(ID);
+            if (selectedContainerItem != null)
+            {
+                RefreshButtons();
+                return;
+            }
+        }
+
+        private Container FindContainerWithID(string ID)
+        {
             foreach (Container c in Containers)
             {
                 if (c.ID.Equals(ID))
                 {
-                    selectedContainerItem = c;
-                    RefreshButtons();
-                    return;
+                    return c;
                 }
             }
+            return null;
         }
+
         private void ImageSelectionChanged(string ID)
         {
             foreach (Image i in Images)
@@ -607,6 +628,15 @@ namespace BCDockerHelper.UI
             {
                 btnStart.Enabled = false;
                 btnStop.Enabled = false;
+                btnRestart.Enabled = false;
+                btnRemove.Enabled = false;
+                btnGetLog.Enabled = false;
+                btnOpenWebClient.Enabled = false;
+            }
+            else if (lstContainer.SelectedIndices.Count > 0)
+            {
+                btnStart.Enabled = false;
+                btnStop.Enabled = true;
                 btnRestart.Enabled = false;
                 btnRemove.Enabled = false;
                 btnGetLog.Enabled = false;
@@ -683,6 +713,18 @@ namespace BCDockerHelper.UI
             txtTag.DataBindings.Add("Text", Classes.GUIBindings.Instance, "Tag");
         }
 
+
+        private void StopContainerList()
+        {
+            if (stopList.Count > 0)
+            {
+                Container c = stopList.Pop();
+                TaskFactory tf = new TaskFactory();
+                var result = c.Stop();
+                tf.FromAsync(result, x => { StopContainerList(); });
+            }
+            FillContainerListBox();
+        }
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
